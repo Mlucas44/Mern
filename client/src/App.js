@@ -7,17 +7,18 @@ import Signup from './pages/Signup'
 import AdminPage from './pages/AdminPage'
 import useAuthContext from './hooks/useAuthContext'
 import useUser from './hooks/useUser'
+import NavBar from './components/Navbar/Navbar'
 
 const App = () => {
   const {user} = useAuthContext()
   const { userInfo } = useUser();
   return (
     <>
-    {/* <NavBar userInfo={userInfo} /> */}
+     <NavBar userInfo={userInfo} /> 
           <Routes>
             <Route 
               path='/' 
-              element={user ? <HomePage userInfo={userInfo} /> : <Navigate to="/login"/>}/>
+              element={user ? <HomePage /> : <Navigate to="/login"/>}/>
             <Route 
               path='/login' 
               element={!user ? <Login/> : <Navigate to="/"/>}/>

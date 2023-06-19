@@ -1,18 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import Navbar from './../Navbar/Navbar'
 import heroimg from './../../images/hero.png'
 import './Home.scss'
 
-const Home = ({ userInfo }) => {
+const Home = () => {
 
     return (
         <>
-            <Navbar userInfo={userInfo}/>
             <Hero />
-            {userInfo && userInfo.role === 'admin' && (
-                <p>Vous êtes connecté en tant qu'administrateur.</p>
-            )}
             <main className="container">
                 <Cta />
             </main>

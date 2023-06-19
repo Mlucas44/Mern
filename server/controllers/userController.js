@@ -6,17 +6,14 @@ const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SCRET, { expiresIn: '3d' });
 }
 
-//singnup user
+//inscription d'un new user
 const signupUser = async (req, res) => {
-
     const { name, email, username, password, role } = req.body;
 
     try {
         const user = await User.signup(name, email, username, password, role);
-
         //creating jwt token
         const token = createToken(user._id);
-
         res.status(200).json({ email, token })
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -25,7 +22,7 @@ const signupUser = async (req, res) => {
 }
 
 
-//login user
+//connexion d'un user
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -40,7 +37,7 @@ const loginUser = async (req, res) => {
     }
 }
 
-
+// récupère les infos de l'user connecté 
 const getUserInfo = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select('-password');
@@ -51,5 +48,49 @@ const getUserInfo = async (req, res) => {
     }
 }
 
+// récupère tous les users
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find().select('-password');
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
 
-module.exports = { signupUser, loginUser, getUserInfo }
+// ajoute un user
+const addUser = async (req, res) => {
+    const { name, email, username, password, role } = req.body;
+
+    try {
+        const user = await User.signup(name, email, username, password, role);
+        // Return the newly created user
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+//modifie un utilisateur 
+const updateUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password');
+        if (!user) throw Error('User not found');
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+// supprime un user
+const deleteUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) throw Error('User not found');
+        res.status(200).json({ message: 'User deleted' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+module.exports = { signupUser, loginUser, getUserInfo, getAllUsers, addUser, updateUser, deleteUser}

@@ -1,0 +1,22 @@
+.admin-container {
+    padding: 1em;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.user-card {
+    background: #f5f5f5;
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+
+    h3 {
+        margin: 0;
+    }
+
+    p {
+        margin: 0.5em 0;
+    }
+}

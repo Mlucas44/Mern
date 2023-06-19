@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Form.scss'
-import Navbar from './../Navbar/Navbar'
 import useSignup from './../../hooks/useSignup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,11 +58,6 @@ const SignupPage = () => {
   }
   return (
     <>
-
-      {/* adding navabr to page */}
-      <Navbar isLogin="false" />
-
-
       {/* adding react tostify to page */}
       <ToastContainer
         position="top-right"
