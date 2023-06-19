@@ -5,7 +5,7 @@ import './navbar.scss'
 import {useLogout}  from './../../hooks/useLogout'
 import useAuthContext from './../../hooks/useAuthContext'
 
-const Navbar = () => {
+const Navbar = ({ userInfo }) => {
 const {user} = useAuthContext()
 
   return (
@@ -24,6 +24,11 @@ const {user} = useAuthContext()
                 <li>
                   <NavLink to="/" className='menu-item'>Home</NavLink>
                 </li>
+                {userInfo && userInfo.role === 'admin' && (
+                <li>
+                <NavLink to="/admin" className='menu-item'>Admin</NavLink>
+                </li>
+            )}
               </ul>
             </div>
           </div>

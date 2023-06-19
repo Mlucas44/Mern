@@ -103,11 +103,10 @@ const SignupPage = () => {
               </div>
               <div className="input-group">
                 <select value={FormData.role} onChange={handleinput} name="role" id="role">
-                  <option value="">Select role...</option>
+                  <option value="" disabled selected>Select role...</option>
                   <option value="user">User</option>
                   <option value="admin">Admin</option>
                 </select>
-                <label htmlFor="role">Role</label>
               </div>
 
               <div className="input-group">

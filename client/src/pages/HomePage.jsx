@@ -1,10 +1,11 @@
 import React from 'react'
 import Home from './../components/Home/Home' 
 
-const HomePage = () => {
+const HomePage = ({ userInfo }) => {
+
   return (
     <>
-    <Home/>
+    <Home userInfo={userInfo}/>
     </>
   )
 }

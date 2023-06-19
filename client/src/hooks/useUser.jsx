@@ -9,8 +9,9 @@ const useUser = () => {
         setIsLoading(true);
         setError(null);
 
-        // Getting the token from local storage
-        const token = localStorage.getItem("token");
+         // Getting the token from local storage
+         const storedUser = JSON.parse(localStorage.getItem("user"));
+         const token = storedUser?.token;
 
         try {
             const response = await fetch('/api/user/me', {
