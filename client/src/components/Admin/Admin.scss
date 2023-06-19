@@ -10,7 +10,7 @@
     padding: 1em;
     margin: 1em 0;
     border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 
     h3 {
         margin: 0;
@@ -19,4 +19,40 @@
     p {
         margin: 0.5em 0;
     }
+}
+
+.toast-content {
+    text-align: center;
+    font-size: 1.25em; // Augmente la taille du texte
+    width: 400px; // Augmente la largeur du toast
+}
+
+.toast-buttons {
+    display: flex;
+    justify-content: space-between; // Espacement égal entre les boutons
+    margin-top: 1rem;
+}
+
+.toast-delete-button,
+.toast-cancel-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1em; // Augmente la taille du texte du bouton
+    width: 100px; // Augmente la largeur du bouton
+    text-align: center; // Centre le texte du bouton
+}
+
+.toast-cancel-button {
+    background-color: green;
+}
+
+.Toastify__toast-container {
+    width: 500px;
+    max-width: 100%;
+}
+
+.Toastify__toast {
+    min-height: 150px;
 }
