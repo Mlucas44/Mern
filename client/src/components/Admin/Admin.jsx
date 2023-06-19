@@ -8,7 +8,7 @@ const Admin = ({userInfo}) => {
     return (
         <>
             <Navbar userInfo={userInfo}/>
-            <div>test</div>
+            <div>Vous etes sur la page ADMIN</div>
         </>
     )
 }

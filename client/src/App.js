@@ -26,7 +26,7 @@ const App = () => {
               element={!user ? <Signup/> : <Navigate to="/"/>}/>
             <Route
               path='/admin'
-              element={user && user.role === 'admin' ? <AdminPage userInfo={userInfo}/> : <Navigate to="/"/>}/>
+              element={userInfo && userInfo.role === 'admin' ? <AdminPage userInfo={userInfo}/> : <Navigate to="/"/>}/>
           </Routes>
     </>
   )

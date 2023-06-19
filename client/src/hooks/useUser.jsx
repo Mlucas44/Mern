@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from './../context/AuthContext';
 
 const useUser = () => {
     const [userInfo, setUserInfo] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { user } = useContext(AuthContext);
 
     const getUserInfo = async () => {
         setIsLoading(true);
@@ -37,8 +39,12 @@ const useUser = () => {
     };
 
     useEffect(() => {
-        getUserInfo();
-    }, []);
+        if (user) {
+            getUserInfo();
+        } else {
+            setUserInfo(null);
+        }
+    }, [user]);
 
     return { userInfo, isLoading, error };
 }
