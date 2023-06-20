@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Admin.scss';
 import { useUsers } from './../../hooks/useUsers';
-import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
+import AddUserModal from './Modals/AddUserModal';
+import DeleteUserModal from './Modals/DeleteUserModal';
+import EditUserModal from './Modals/EditUserModal';
 
 const Admin = () => {
     const { users, fetchUsers, isLoading, error, updateUser, deleteUser, addUser } = useUsers();
@@ -18,6 +20,7 @@ const Admin = () => {
         fetchUsers();
     }, [fetchUsers]);
 
+    // modifie un user
     const handleChange = (event) => {
         setUpdatedUser({
           ...updatedUser,
@@ -36,8 +39,7 @@ const Admin = () => {
         setUpdatedUser(user);
         setEditModalShow(true);
       };
-    
-
+    // ajoute un user
     const handleAddUser = (event) => {
         event.preventDefault();
         addUser(newUser);
@@ -45,15 +47,13 @@ const Admin = () => {
         setNewUser({name: '', username: '', email: '', password: '', role: ''});
     };
 
-    
-
     const handleNewUserChange = (event) => {
         setNewUser({
             ...newUser,
             [event.target.name]: event.target.value,
         });
     };
-
+    // supprime un user
     const handleDeleteConfirm = () => {
         deleteUser(deletingUser._id);
         setDeleteModalShow(false);
@@ -107,105 +107,28 @@ const Admin = () => {
                     </tbody>
                 </Table>
             </div>
-
-            <Modal show={deleteModalShow} onHide={() => setDeleteModalShow(false)}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Confirmer la suppression</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Êtes-vous sûr de vouloir supprimer l'utilisateur {deletingUser?.name} ?</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={() => setDeleteModalShow(false)}>
-                            Annuler
-                        </Button>
-                        <Button variant="danger" onClick={handleDeleteConfirm}>
-                            Supprimer
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
-            <Modal show={addModalShow} onHide={() => setAddModalShow(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Ajouter un utilisateur</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <form onSubmit={handleAddUser}>
-                    <div className="mb-3">
-                        <label htmlFor="name" className="form-label">Name</label>
-                        <input onChange={handleNewUserChange} type="text" className="form-control" id="name" placeholder="Name" name="name" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="username" className="form-label">Username</label>
-                        <input onChange={handleNewUserChange} type="text" className="form-control" id="username" placeholder="Username" name="username" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input onChange={handleNewUserChange} type="email" className="form-control" id="email" placeholder="Email" name="email" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input onChange={handleNewUserChange} type="password" className="form-control" id="password" placeholder="Password" name="password" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="role" className="form-label">Role</label>
-                        <select onChange={handleNewUserChange} className="form-select" id="role" name="role">
-                        <option value="" disabled defaultValue>Select role...</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setAddModalShow(false)}>
-                    Annuler
-                    </Button>
-                    <Button variant="primary" onClick={handleAddUser}>
-                    Ajouter
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-            <Modal show={editModalShow} onHide={() => setEditModalShow(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modifier l'utilisateur {updatedUser.name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="name" className="form-label">Name</label>
-                        <input value={updatedUser.name || ''} onChange={handleChange} type="text" className="form-control" id="name" placeholder="Name" name="name" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="username" className="form-label">Username</label>
-                        <input value={updatedUser.username || ''} onChange={handleChange} type="text" className="form-control" id="username" placeholder="Username" name="username" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input value={updatedUser.email || ''} onChange={handleChange} type="email" className="form-control" id="email" placeholder="Email" name="email" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input value={updatedUser.password || ''} onChange={handleChange} type="password" className="form-control" id="password" placeholder="Password" name="password" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="role" className="form-label">Role</label>
-                        <select value={updatedUser.role} onChange={handleChange} className="form-select" id="role" name="role">
-                        <option value="" disabled defaultValue>Select role...</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setEditModalShow(false)}>
-                    Annuler
-                    </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
-                    Enregistrer
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            {/*Modal de suppression*/}
+            <DeleteUserModal 
+                show={deleteModalShow} 
+                handleClose={() => setDeleteModalShow(false)}
+                deletingUser={deletingUser}
+                handleDeleteConfirm={handleDeleteConfirm}
+            />
+            {/*Modal de d'ajout*/}
+            <AddUserModal 
+                show={addModalShow} 
+                handleClose={() => setAddModalShow(false)}
+                handleAddUser={handleAddUser}
+                handleNewUserChange={handleNewUserChange}
+            />
+            {/*Modal de modification*/}
+            <EditUserModal 
+                show={editModalShow} 
+                handleClose={() => setEditModalShow(false)}
+                updatedUser={updatedUser}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+            />
         </div>
     )
 }
