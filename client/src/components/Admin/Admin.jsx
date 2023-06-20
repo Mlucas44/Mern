@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import './Admin.scss'
-import { useUsers } from './../../hooks/useUsers'
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react';
+import './Admin.scss';
+import { useUsers } from './../../hooks/useUsers';
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button } from 'react-bootstrap';
 
 const Admin = () => {
-    const { users, fetchUsers, isLoading, error, updateUser, deleteUser } = useUsers();
+    const { users, fetchUsers, isLoading, error, updateUser, deleteUser, addUser } = useUsers();
     const [editingUser, setEditingUser] = useState(null);
+    const [deletingUser, setDeletingUser] = useState(null);
     const [updatedUser, setUpdatedUser] = useState({});
+    const [newUser, setNewUser] = useState({name: '', username: '', email: '', password: '', role: ''});
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [addModalShow, setAddModalShow] = useState(false);
 
     useEffect(() => {
         fetchUsers();
@@ -25,6 +30,21 @@ const Admin = () => {
         });
     };
 
+    const handleNewUserChange = (event) => {
+        setNewUser({
+            ...newUser,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleAddUser = (event) => {
+        event.preventDefault();
+        console.log(newUser);
+        addUser(newUser);
+        setAddModalShow(false);
+        setNewUser({name: '', username: '', email: '', password: '', role: ''});
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         updateUser(updatedUser);
@@ -32,35 +52,17 @@ const Admin = () => {
         setUpdatedUser({});
     };
 
-
     const handleDeleteClick = (user) => {
-        toast(
-            <div className="toast-content">
-                Êtes-vous sûr de vouloir supprimer l'utilisateur {user.name} ?
-                <div className="toast-buttons">
-                    <button
-                        className="toast-delete-button"
-                        onClick={() => { deleteUser(user._id); toast.dismiss(); }}
-                    >
-                        Supprimer
-                    </button>
-                    <button
-                        className="toast-cancel-button"
-                        onClick={() => toast.dismiss()}
-                    >
-                        Annuler
-                    </button>
-                </div>
-            </div>,
-            {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: false
-            }
-        );
+        setDeletingUser(user);
+        setDeleteModalShow(true);
     };
 
-
-
+    const handleDeleteConfirm = () => {
+        deleteUser(deletingUser._id);
+        setDeleteModalShow(false);
+        setDeletingUser(null);
+    };
+      
     if (isLoading) {
         return <div>Loading...</div>
     }
@@ -72,6 +74,9 @@ const Admin = () => {
     return (
         <div className="admin-container">
             <h1>Page d'administration</h1>
+            <Button variant="primary" onClick={() => setAddModalShow(true)}>
+                Ajouter un utilisateur
+            </Button>
             <h2>Liste des utilisateurs</h2>
             {users && users.map(user => (
                 <div className="user-card" key={user._id}>
@@ -104,12 +109,67 @@ const Admin = () => {
                             <p>Role: {user.role}</p>
                             <button onClick={() => handleEditClick(user)}>Modifier</button>
                             <button onClick={() => handleDeleteClick(user)}>Supprimer</button>
-
                         </>
                     )}
                 </div>
             ))}
-            <ToastContainer />
+
+            <Modal show={deleteModalShow} onHide={() => setDeleteModalShow(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirmer la suppression</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Êtes-vous sûr de vouloir supprimer l'utilisateur {deletingUser?.name} ?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setDeleteModalShow(false)}>
+                            Annuler
+                        </Button>
+                        <Button variant="danger" onClick={handleDeleteConfirm}>
+                            Supprimer
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+            <Modal show={addModalShow} onHide={() => setAddModalShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Ajouter un utilisateur</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form onSubmit={handleAddUser}>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">Name</label>
+                        <input onChange={handleNewUserChange} type="text" className="form-control" id="name" placeholder="Name" name="name" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="username" className="form-label">Username</label>
+                        <input onChange={handleNewUserChange} type="text" className="form-control" id="username" placeholder="Username" name="username" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input onChange={handleNewUserChange} type="email" className="form-control" id="email" placeholder="Email" name="email" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input onChange={handleNewUserChange} type="password" className="form-control" id="password" placeholder="Password" name="password" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="role" className="form-label">Role</label>
+                        <select onChange={handleNewUserChange} className="form-select" id="role" name="role">
+                        <option value="" disabled defaultValue>Select role...</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    </form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setAddModalShow(false)}>
+                    Annuler
+                    </Button>
+                    <Button variant="primary" onClick={handleAddUser}>
+                    Ajouter
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

@@ -43,7 +43,7 @@ export const useUsers = () => {
         setError(null);
 
         try {
-            const response = await fetch('/api/user', {
+            const response = await fetch('/api/user/add', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export const useUsers = () => {
             setIsLoading(false);
         }
     };
-    // modifi un user
+    // modifier un user
     const updateUser = async (updatedUser) => {
         setIsLoading(true);
         setError(null);

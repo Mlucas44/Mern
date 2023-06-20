@@ -21,38 +21,3 @@
     }
 }
 
-.toast-content {
-    text-align: center;
-    font-size: 1.25em; // Augmente la taille du texte
-    width: 400px; // Augmente la largeur du toast
-}
-
-.toast-buttons {
-    display: flex;
-    justify-content: space-between; // Espacement égal entre les boutons
-    margin-top: 1rem;
-}
-
-.toast-delete-button,
-.toast-cancel-button {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1em; // Augmente la taille du texte du bouton
-    width: 100px; // Augmente la largeur du bouton
-    text-align: center; // Centre le texte du bouton
-}
-
-.toast-cancel-button {
-    background-color: green;
-}
-
-.Toastify__toast-container {
-    width: 500px;
-    max-width: 100%;
-}
-
-.Toastify__toast {
-    min-height: 150px;
-}
