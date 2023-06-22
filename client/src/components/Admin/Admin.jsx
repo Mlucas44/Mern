@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import './Admin.scss';
-import { useUsers } from './../../hooks/useUsers';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory, { PaginationProvider, PaginationTotalStandalone, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import AddUserModal from './Modals/AddUserModal';
 import DeleteUserModal from './Modals/DeleteUserModal';
 import EditUserModal from './Modals/EditUserModal';
+import { useUsers } from './../../hooks/useUsers';
+import './Admin.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp, faArrowDown, faPlus, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FaSearch } from 'react-icons/fa';
 
 const Admin = () => {
     const { users, fetchUsers, isLoading, error, updateUser, deleteUser, addUser } = useUsers();
@@ -16,9 +21,90 @@ const Admin = () => {
     const [updatedUser, setUpdatedUser] = useState({});
     const [editModalShow, setEditModalShow] = useState(false);
 
+  
+    // Ajoutez un nouvel état pour les utilisateurs filtrés
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    
+
+    function sortCaret(order) {
+        if (!order) return (<></>);
+        else if (order === 'asc') return (<>&nbsp;<FontAwesomeIcon icon={faArrowUp} /></>);
+        else if (order === 'desc') return (<>&nbsp;<FontAwesomeIcon icon={faArrowDown} /></>);
+        return null;
+      }
+    
+    const defaultSorted = [{
+        dataField: 'name', // nom de la colonne selon laquelle le tri doit être effectué
+        order: 'asc' // ordre de tri
+    }];
+
+    const options = {
+        custom: true,
+        totalSize: users ? users.length : 0
+    };
+    const columns = [
+        {
+          dataField: 'name',
+          text: 'Nom',
+          sort: true,
+          sortCaret: sortCaret
+        },
+        {
+          dataField: 'email',
+          text: 'Email',
+          sort: true,
+          sortCaret: sortCaret
+        },
+        {
+          dataField: 'username',
+          text: 'Username',
+          sort: true,
+          sortCaret: sortCaret
+        },
+        {
+          dataField: 'role',
+          text: 'Role',
+          sort: true,
+          sortCaret: sortCaret
+        },
+        {
+        dataField: 'actions',
+        text: 'Actions',
+        isDummyField: true,
+        csvExport: false,
+        formatter: (cell, row) => {
+            return (
+                <div className="action-buttons">
+                    <Button variant="primary" onClick={() => handleEditModalShow(row)}>
+                        <FontAwesomeIcon icon={faPencilAlt} />
+                    </Button>
+                    <Button variant="danger" onClick={() => handleDeleteClick(row)}>
+                        <FontAwesomeIcon icon={faTrash} />
+                    </Button>
+                </div>
+                );
+        }
+        }
+    ];
+    
     useEffect(() => {
         fetchUsers();
     }, [fetchUsers]);
+
+    // Mettre à jour filteredUsers chaque fois que les users changent
+    useEffect(() => {
+        setFilteredUsers(users);
+    }, [users]);
+
+    const handleFilterChange = (event) => {
+        const filterText = event.target.value.toLowerCase();
+        setFilteredUsers(users.filter(user =>
+            user.name.toLowerCase().includes(filterText) ||
+            user.email.toLowerCase().includes(filterText) ||
+            user.username.toLowerCase().includes(filterText) ||
+            user.role.toLowerCase().includes(filterText)
+        ));
+    }
 
     // modifie un user
     const handleChange = (event) => {
@@ -78,34 +164,41 @@ const Admin = () => {
             <h1>Page d'administration</h1>
             <h2>Liste des utilisateurs</h2>
             <div className="user-table-container">
-            <Button variant="primary" onClick={() => setAddModalShow(true)}>
-                Ajouter un utilisateur
-            </Button>
-                <Table className="user-table">
-                    <thead>
-                        <tr>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users && users.map(user => (
-                        <tr key={user._id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.username}</td>
-                            <td>{user.role}</td>
-                            <td>
-                            <Button variant="primary" onClick={() => handleEditModalShow(user)}>Modifier</Button>
-                            <Button variant="danger" onClick={() => handleDeleteClick(user)}>Supprimer</Button>
-                            </td>
-                        </tr>
-                        ))}
-                    </tbody>
-                </Table>
+            <div className="search-add-wrapper">
+    <div className="search-input">
+        <input type="text" placeholder="Rechercher..." onChange={handleFilterChange} />
+        <FaSearch />
+    </div>
+    <Button variant="primary" onClick={() => setAddModalShow(true)}>
+        <FontAwesomeIcon icon={faPlus} /> Ajouter un utilisateur
+    </Button>
+</div>
+                {filteredUsers && filteredUsers.length > 0 && 
+                <PaginationProvider pagination={paginationFactory(options)}>
+                {({ paginationProps, paginationTableProps }) => (
+                    <div>
+                        <BootstrapTable 
+                            keyField='_id' 
+                            data={ filteredUsers }
+                            columns={ columns }
+                            {...paginationTableProps}
+                            defaultSorted={ defaultSorted }
+                            classes="user-table"
+                        />
+                        <div className="pagination-wrapper">
+                            <PaginationTotalStandalone
+                                { ...paginationProps}
+                            />
+                            <PaginationListStandalone
+                                { ...paginationProps }
+                            />
+                        </div>
+                    </div>
+                )}
+            </PaginationProvider>
+                
+            }
+
             </div>
             {/*Modal de suppression*/}
             <DeleteUserModal 
