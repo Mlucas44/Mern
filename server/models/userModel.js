@@ -82,4 +82,30 @@ userSchema.statics.login = async function (email, password) {
 
 }
 
+userSchema.statics.addUser = async function (name, email, username, password, role) {
+
+    //validation
+    if (!name || !email || !username || !password || !role) {
+        throw Error('all fields must be fields')
+    }
+    if (!validator.isEmail(email)) {
+        throw Error('email is not valid')
+    }
+    if (!validator.isStrongPassword(password)) {
+        throw Error('not a strong password')
+    }
+
+    const emailExists = await this.findOne({ email });
+    if (emailExists) {
+        throw Error('email already in use');
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt)
+
+    const user = await this.create({ name, email, username, password: hash, role })
+
+    return user;
+}
+
 module.exports = mongoose.model('User', userSchema)

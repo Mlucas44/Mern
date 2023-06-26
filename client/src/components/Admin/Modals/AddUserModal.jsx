@@ -27,11 +27,11 @@ const AddUserModal = ({ show, handleClose, handleAddUser, handleNewUserChange })
                     </div>
                     <div className="mb-3">
                         <label htmlFor="role" className="form-label">Role</label>
-                        <select onChange={handleNewUserChange} className="form-select" id="role" name="role">
-                        <option value="" disabled defaultValue>Select role...</option>
+                        <select onChange={handleNewUserChange} className="form-select" id="role" name="role" defaultValue="">
+                        <option value="" disabled>Select role...</option>
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
-                        </select>
+                    </select>
                     </div>
                 </form>
             </Modal.Body>

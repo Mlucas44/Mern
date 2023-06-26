@@ -1,101 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory, { PaginationProvider, PaginationTotalStandalone, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import UserTable from './Items/UserTable';
 import AddUserModal from './Modals/AddUserModal';
 import DeleteUserModal from './Modals/DeleteUserModal';
 import EditUserModal from './Modals/EditUserModal';
 import { useUsers } from './../../hooks/useUsers';
 import './Admin.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp, faArrowDown, faPlus, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FaSearch } from 'react-icons/fa';
 
 const Admin = () => {
+     // Hooks pour le chargement des données et la gestion des erreurs
     const { users, fetchUsers, isLoading, error, updateUser, deleteUser, addUser } = useUsers();
+    // State declarations
+    // 1. User management state variables
     const [newUser, setNewUser] = useState({name: '', username: '', email: '', password: '', role: ''});
-    const [addModalShow, setAddModalShow] = useState(false);
-    const [deletingUser, setDeletingUser] = useState(null);
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [updatedUser, setUpdatedUser] = useState({});
+    const [deletingUser, setDeletingUser] = useState(null);
+
+    // 2. UI state variables
+    const [addModalShow, setAddModalShow] = useState(false);
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
-
-  
-    // Ajoutez un nouvel état pour les utilisateurs filtrés
     const [filteredUsers, setFilteredUsers] = useState([]);
-    
-
-    function sortCaret(order) {
-        if (!order) return (<></>);
-        else if (order === 'asc') return (<>&nbsp;<FontAwesomeIcon icon={faArrowUp} /></>);
-        else if (order === 'desc') return (<>&nbsp;<FontAwesomeIcon icon={faArrowDown} /></>);
-        return null;
-      }
-    
-    const defaultSorted = [{
-        dataField: 'name', // nom de la colonne selon laquelle le tri doit être effectué
-        order: 'asc' // ordre de tri
-    }];
-
-    const options = {
-        custom: true,
-        totalSize: users ? users.length : 0
+    // Handlers
+    // 1. CRUD handlers
+    const handleAddUser = (event) => {
+        event.preventDefault();
+        addUser(newUser);
+        setAddModalShow(false);
+        setNewUser({name: '', username: '', email: '', password: '', role: ''});
     };
-    const columns = [
-        {
-          dataField: 'name',
-          text: 'Nom',
-          sort: true,
-          sortCaret: sortCaret
-        },
-        {
-          dataField: 'email',
-          text: 'Email',
-          sort: true,
-          sortCaret: sortCaret
-        },
-        {
-          dataField: 'username',
-          text: 'Username',
-          sort: true,
-          sortCaret: sortCaret
-        },
-        {
-          dataField: 'role',
-          text: 'Role',
-          sort: true,
-          sortCaret: sortCaret
-        },
-        {
-        dataField: 'actions',
-        text: 'Actions',
-        isDummyField: true,
-        csvExport: false,
-        formatter: (cell, row) => {
-            return (
-                <div className="action-buttons">
-                    <Button variant="primary" onClick={() => handleEditModalShow(row)}>
-                        <FontAwesomeIcon icon={faPencilAlt} />
-                    </Button>
-                    <Button variant="danger" onClick={() => handleDeleteClick(row)}>
-                        <FontAwesomeIcon icon={faTrash} />
-                    </Button>
-                </div>
-                );
-        }
-        }
-    ];
-    
-    useEffect(() => {
-        fetchUsers();
-    }, [fetchUsers]);
-
-    // Mettre à jour filteredUsers chaque fois que les users changent
-    useEffect(() => {
-        setFilteredUsers(users);
-    }, [users]);
-
+    const handleNewUserChange = (event) => {
+        setNewUser({
+            ...newUser,
+            [event.target.name]: event.target.value,
+        });
+    };
+    const handleDeleteConfirm = () => {
+        deleteUser(deletingUser._id);
+        setDeleteModalShow(false);
+        setDeletingUser(null);
+    };
+    const handleDeleteClick = (user) => {
+        setDeletingUser(user);
+        setDeleteModalShow(true);
+    };
+    const handleEditChange = (event) => {
+        setUpdatedUser({
+          ...updatedUser,
+          [event.target.name]: event.target.value,
+        });
+      };
+    const handleEditSubmit = (event) => {
+        event.preventDefault();
+        updateUser(updatedUser);
+        setUpdatedUser({});
+        setEditModalShow(false);
+    };
+    const handleEditModalShow = (user) => {
+        setUpdatedUser(user);
+        setEditModalShow(true);
+    };
+    // 2. Filter handler
     const handleFilterChange = (event) => {
         const filterText = event.target.value.toLowerCase();
         setFilteredUsers(users.filter(user =>
@@ -105,51 +69,13 @@ const Admin = () => {
             user.role.toLowerCase().includes(filterText)
         ));
     }
-
-    // modifie un user
-    const handleChange = (event) => {
-        setUpdatedUser({
-          ...updatedUser,
-          [event.target.name]: event.target.value,
-        });
-      };
-    
-      const handleSubmit = (event) => {
-        event.preventDefault();
-        updateUser(updatedUser);
-        setUpdatedUser({});
-        setEditModalShow(false);
-      };
-    
-      const handleEditModalShow = (user) => {
-        setUpdatedUser(user);
-        setEditModalShow(true);
-      };
-    // ajoute un user
-    const handleAddUser = (event) => {
-        event.preventDefault();
-        addUser(newUser);
-        setAddModalShow(false);
-        setNewUser({name: '', username: '', email: '', password: '', role: ''});
-    };
-
-    const handleNewUserChange = (event) => {
-        setNewUser({
-            ...newUser,
-            [event.target.name]: event.target.value,
-        });
-    };
-    // supprime un user
-    const handleDeleteConfirm = () => {
-        deleteUser(deletingUser._id);
-        setDeleteModalShow(false);
-        setDeletingUser(null);
-    };
-
-    const handleDeleteClick = (user) => {
-        setDeletingUser(user);
-        setDeleteModalShow(true);
-    };
+    // Effects
+    useEffect(() => {
+        fetchUsers();
+    }, [fetchUsers]);
+    useEffect(() => {
+        setFilteredUsers(users);
+    }, [users]);
       
     if (isLoading) {
         return <div>Loading...</div>
@@ -163,64 +89,36 @@ const Admin = () => {
         <div className="admin-container">
             <h1>Page d'administration</h1>
             <h2>Liste des utilisateurs</h2>
-            <div className="user-table-container">
-            <div className="search-add-wrapper">
-    <div className="search-input">
-        <input type="text" placeholder="Rechercher..." onChange={handleFilterChange} />
-        <FaSearch />
-    </div>
-    <Button variant="primary" onClick={() => setAddModalShow(true)}>
-        <FontAwesomeIcon icon={faPlus} /> Ajouter un utilisateur
-    </Button>
-</div>
-                {filteredUsers && filteredUsers.length > 0 && 
-                <PaginationProvider pagination={paginationFactory(options)}>
-                {({ paginationProps, paginationTableProps }) => (
-                    <div>
-                        <BootstrapTable 
-                            keyField='_id' 
-                            data={ filteredUsers }
-                            columns={ columns }
-                            {...paginationTableProps}
-                            defaultSorted={ defaultSorted }
-                            classes="user-table"
-                        />
-                        <div className="pagination-wrapper">
-                            <PaginationTotalStandalone
-                                { ...paginationProps}
-                            />
-                            <PaginationListStandalone
-                                { ...paginationProps }
-                            />
-                        </div>
-                    </div>
-                )}
-            </PaginationProvider>
-                
-            }
 
-            </div>
-            {/*Modal de suppression*/}
+            <UserTable
+            users={filteredUsers}
+            handleFilterChange={handleFilterChange}
+            setAddModalShow={setAddModalShow}
+            onDeleteClick={handleDeleteClick}
+            onEditClick={handleEditModalShow}
+            />
+
+
             <DeleteUserModal 
                 show={deleteModalShow} 
                 handleClose={() => setDeleteModalShow(false)}
                 deletingUser={deletingUser}
                 handleDeleteConfirm={handleDeleteConfirm}
             />
-            {/*Modal de d'ajout*/}
+
             <AddUserModal 
                 show={addModalShow} 
                 handleClose={() => setAddModalShow(false)}
                 handleAddUser={handleAddUser}
                 handleNewUserChange={handleNewUserChange}
             />
-            {/*Modal de modification*/}
+
             <EditUserModal 
                 show={editModalShow} 
                 handleClose={() => setEditModalShow(false)}
                 updatedUser={updatedUser}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
+                handleEditChange={handleEditChange}
+                handleEditSubmit={handleEditSubmit}
             />
         </div>
     )
