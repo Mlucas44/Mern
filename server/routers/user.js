@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const requireAuth = require('./../middleware/requireAuth');
 const requireRole = require('./../middleware/requireRole');
-const { signupUser, loginUser, getUserInfo, getAllUsers, addUser, updateUser, deleteUser} = require('./../controllers/userController')
+const { signupUser, loginUser, getUserInfo, checkEmail, getAllUsers, addUser, updateUser, deleteUser} = require('./../controllers/userController')
 
 router.post('/signup', signupUser)
 
@@ -13,6 +13,9 @@ router.post('/login', loginUser)
 
 //récupère les infos de l'user connecté 
 router.get('/me', requireAuth, getUserInfo)
+
+// vérifie l'email
+router.get('/check-email/:email', requireAuth, requireRole('admin'), checkEmail);
 
 // récupère tous les users
 router.get('/', requireAuth, requireRole('admin'), getAllUsers);

@@ -9,6 +9,31 @@ export const useUsers = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const token = storedUser?.token;
 
+    // Check si email exist
+    const checkEmailExists = async (email) => {
+        try {
+            const response = await fetch(`/api/user/check-email/${email}`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+
+            console.log(response);
+
+            if (data.exists) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    };
+
     // récupère tous les users
         const fetchUsers = useCallback(async () => {
         setIsLoading(true);
@@ -119,5 +144,5 @@ export const useUsers = () => {
         }
     };
 
-    return { fetchUsers, addUser, updateUser, deleteUser, isLoading, error, users };
+    return { fetchUsers, checkEmailExists, addUser, updateUser, deleteUser, isLoading, error, users };
 }

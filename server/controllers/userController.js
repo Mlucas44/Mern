@@ -48,6 +48,16 @@ const getUserInfo = async (req, res) => {
     }
 }
 
+// vérifie l'email
+const checkEmail = async (req, res) => {
+    const checkEmail = await User.findOne({ email: req.params.email });
+    if (checkEmail) {
+        res.status(200).send({ exists: true });
+    } else {
+        res.status(200).send({ exists: false });
+    }
+};
+
 // récupère tous les users
 const getAllUsers = async (req, res) => {
     try {
@@ -63,7 +73,7 @@ const addUser = async (req, res) => {
     const { name, email, username, password, role } = req.body;
 
     try {
-        const user = await User.signup(name, email, username, password, role);
+        const user = await User.addUser(name, email, username, password, role);
         // Return the newly created user
         res.status(200).json(user);
     } catch (error) {
@@ -93,4 +103,4 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = { signupUser, loginUser, getUserInfo, getAllUsers, addUser, updateUser, deleteUser}
+module.exports = { signupUser, loginUser, getUserInfo, checkEmail, getAllUsers, addUser, updateUser, deleteUser}

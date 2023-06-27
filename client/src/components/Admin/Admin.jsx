@@ -3,12 +3,16 @@ import UserTable from './Items/UserTable';
 import AddUserModal from './Modals/AddUserModal';
 import DeleteUserModal from './Modals/DeleteUserModal';
 import EditUserModal from './Modals/EditUserModal';
+import validator from 'validator';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useUsers } from './../../hooks/useUsers';
 import './Admin.scss';
 
+
 const Admin = () => {
      // Hooks pour le chargement des données et la gestion des erreurs
-    const { users, fetchUsers, isLoading, error, updateUser, deleteUser, addUser } = useUsers();
+    const { users, fetchUsers, checkEmailExists, isLoading, error, updateUser, deleteUser, addUser } = useUsers();
     // State declarations
     // 1. User management state variables
     const [newUser, setNewUser] = useState({name: '', username: '', email: '', password: '', role: ''});
@@ -22,9 +26,34 @@ const Admin = () => {
     const [filteredUsers, setFilteredUsers] = useState([]);
     // Handlers
     // 1. CRUD handlers
-    const handleAddUser = (event) => {
+    const handleAddUser = async (event) => {
         event.preventDefault();
+        const { name, username, email, password, role } = newUser;
+    
+        if (!name || !username || !email || !password || !role) {
+            toast.error('Tous les champs doivent être remplis');
+            return; 
+        }
+    
+        if (!validator.isEmail(email)) {
+            toast.error('Email n\'est pas valide');
+            return; 
+        }
+    
+        if (!validator.isStrongPassword(password)) {
+            toast.error('Le mot de passe n\'est pas assez fort');
+            return; 
+        }
+    
+        // Vérifier si l'email existe déjà
+        const emailExists = await checkEmailExists(email);
+        if (emailExists) {
+            toast.error('Email déjà utilisé');
+            return;
+        }
+        toast.success('L\'utilisateur a bien été ajouté')
         addUser(newUser);
+        
         setAddModalShow(false);
         setNewUser({name: '', username: '', email: '', password: '', role: ''});
     };
@@ -76,7 +105,7 @@ const Admin = () => {
     useEffect(() => {
         setFilteredUsers(users);
     }, [users]);
-      
+ 
     if (isLoading) {
         return <div>Loading...</div>
     }
@@ -84,9 +113,10 @@ const Admin = () => {
     if (error) {
         return <div>Error: {error}</div>
     }
-
+    
     return (
         <div className="admin-container">
+            <ToastContainer/>
             <h1>Page d'administration</h1>
             <h2>Liste des utilisateurs</h2>
 
