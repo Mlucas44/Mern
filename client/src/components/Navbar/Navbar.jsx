@@ -6,7 +6,6 @@ import {useLogout}  from './../../hooks/useLogout'
 import useAuthContext from './../../hooks/useAuthContext'
 
 const Navbar = ({ userInfo }) => {
-const {user} = useAuthContext()
 
   return (
     <>
@@ -32,8 +31,8 @@ const {user} = useAuthContext()
               </ul>
             </div>
           </div>
-          {user && (<DropdownMenu />)}
-          {!user && (<LoginMenu />)}
+          {userInfo && (<DropdownMenu />)}
+          {!userInfo && (<LoginMenu />)}
         </nav>
       </div>
     </>

@@ -1,20 +1,19 @@
 import React from 'react'
 import { Routes, Route,Navigate } from "react-router-dom"
-//import NavBar from './components/Navbar/Navbar'
 import HomePage from './pages/HomePage'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AdminPage from './pages/AdminPage'
-import useAuthContext from './hooks/useAuthContext'
-import useUser from './hooks/useUser'
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 import NavBar from './components/Navbar/Navbar'
 
 const App = () => {
-  const {user} = useAuthContext()
-  const { userInfo } = useUser();
+  const { user, userInfo } = useContext(AuthContext);
+
   return (
     <>
-     <NavBar userInfo={userInfo} /> 
+     <NavBar  userInfo={userInfo} /> 
           <Routes>
             <Route 
               path='/' 
@@ -27,7 +26,7 @@ const App = () => {
               element={!user ? <Signup/> : <Navigate to="/"/>}/>
             <Route
               path='/admin'
-              element={userInfo && userInfo.role === 'admin' ? <AdminPage userInfo={userInfo}/> : <Navigate to="/"/>}/>
+              element={userInfo && userInfo.role === 'admin' ? <AdminPage/> : <Navigate to="/"/>}/>
           </Routes>
     </>
   )

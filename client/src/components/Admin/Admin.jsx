@@ -51,9 +51,8 @@ const Admin = () => {
             toast.error('Email déjà utilisé');
             return;
         }
-        toast.success('L\'utilisateur a bien été ajouté')
         addUser(newUser);
-        
+        toast.success('L\'utilisateur a bien été ajouté')
         setAddModalShow(false);
         setNewUser({name: '', username: '', email: '', password: '', role: ''});
     };
@@ -65,6 +64,7 @@ const Admin = () => {
     };
     const handleDeleteConfirm = () => {
         deleteUser(deletingUser._id);
+        toast.success('L\'utilisateur a bien été supprimé')
         setDeleteModalShow(false);
         setDeletingUser(null);
     };
@@ -72,15 +72,10 @@ const Admin = () => {
         setDeletingUser(user);
         setDeleteModalShow(true);
     };
-    const handleEditChange = (event) => {
-        setUpdatedUser({
-          ...updatedUser,
-          [event.target.name]: event.target.value,
-        });
-      };
     const handleEditSubmit = (event) => {
         event.preventDefault();
         updateUser(updatedUser);
+        toast.success('L\'utilisateur a bien été modifié')
         setUpdatedUser({});
         setEditModalShow(false);
     };
@@ -88,6 +83,12 @@ const Admin = () => {
         setUpdatedUser(user);
         setEditModalShow(true);
     };
+    const handleEditChange = (event) => {
+        setUpdatedUser({
+          ...updatedUser,
+          [event.target.name]: event.target.value,
+        });
+      };
     // 2. Filter handler
     const handleFilterChange = (event) => {
         const filterText = event.target.value.toLowerCase();
@@ -106,10 +107,6 @@ const Admin = () => {
         setFilteredUsers(users);
     }, [users]);
  
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
-
     if (error) {
         return <div>Error: {error}</div>
     }
@@ -126,6 +123,7 @@ const Admin = () => {
             setAddModalShow={setAddModalShow}
             onDeleteClick={handleDeleteClick}
             onEditClick={handleEditModalShow}
+            isLoading={isLoading}
             />
 
 

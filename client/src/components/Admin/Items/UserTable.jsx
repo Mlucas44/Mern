@@ -2,13 +2,13 @@ import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider, PaginationTotalStandalone, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown, faPencilAlt, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FaSearch } from 'react-icons/fa';
 
 
-const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, onEditClick }) => {
+const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, onEditClick, isLoading }) => {
     function sortCaret(order) {
         if (!order) return (<></>);
         else if (order === 'asc') return (<>&nbsp;<FontAwesomeIcon icon={faArrowUp} /></>);
@@ -82,7 +82,13 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
               <FontAwesomeIcon icon={faPlus} /> Ajouter un utilisateur
             </Button>
           </div>
-          {users ? (
+          {isLoading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+              <Spinner animation="border" role="status">
+                <span className="sr-only">Chargement...</span>
+              </Spinner>
+            </div>
+          ) : users ? (
             <PaginationProvider pagination={paginationFactory(options)}>
               {({ paginationProps, paginationTableProps }) => (
                 <div>
@@ -106,7 +112,7 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
               )}
             </PaginationProvider>
           ) : (
-            <p>Loading...</p>
+            <p>Aucun utilisateur à afficher</p>
           )}
         </div>
     );

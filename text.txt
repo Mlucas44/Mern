@@ -1,3 +1,10 @@
+Fichier.env : 
+
 DB_URI=mongodb+srv://Lucas:hDgtYrHDJA3gOw1c@mern.sluqq2s.mongodb.net/?retryWrites=true&w=majority
 
 SCRET=MaCléSecrèteTrèsFort3!#
+
+Issue a résoudre :
+
+- Problème d'actualisation (lorsque je suis sur la page admin et que j'actualise cela me met sur la page Home du a la recupération de l'utilisateur)
+- Action Modifier a revoir pages Admin
