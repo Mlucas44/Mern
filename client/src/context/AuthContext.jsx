@@ -1,4 +1,5 @@
-import { createContext, useReducer, useEffect,  useCallback } from "react";
+import { createContext, useReducer, useEffect, useCallback } from "react";
+import { storageService } from '../storageService';
 
 export const AuthContext = createContext();
 
@@ -27,14 +28,14 @@ export const authReducer = (state, action) => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
   const getUserInfo = useCallback(async () => {
     dispatch({ type: 'SET_USER_INFO_LOADING', payload: true });
     try {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
+      const storedUser = storageService.get("user"); // Utilisation du storageService
       const token = storedUser?.token;
-      
+
       const response = await fetch('/api/user/me', {
         method: 'GET',
         headers: {
@@ -48,7 +49,7 @@ export const AuthContextProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error(data.error);
       }
-      
+
       dispatch({ type: 'SET_USER_INFO', payload: data });
     } catch (err) {
       dispatch({ type: 'SET_USER_ERROR', payload: err.message });
@@ -58,7 +59,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = storageService.get('user'); // Utilisation du storageService
     if (storedUser && storedUser.token) {
       dispatch({ type: 'LOGIN', payload: storedUser });
       getUserInfo();
@@ -74,7 +75,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [state.user, getUserInfo]);
 
   return (
-    <AuthContext.Provider value={{...state, dispatch}}>
+    <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );
