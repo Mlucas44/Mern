@@ -1,40 +1,21 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import useAuthContext from './useAuthContext'
+import useApiRequest from './useApiRequest'
 
 const useSignup = () => {
-    const [error, setError] = useState(null)
-    const [success, setsuccess] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
-    const { dispatch } = useAuthContext()
+    const { dispatch } = useAuthContext();
+    const { isLoading, error, data, execute } = useApiRequest('/api/user/signup', 'POST');
 
-    const signup = async (name, email, username, password, role) => {
-        setIsLoading(true)
-        setError(null);
-
-        const response = await fetch('/api/user/signup', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, username, password, role })
-        })
-
-        const json = await response.json();
-        if (!response.ok) {
-            setIsLoading(false);
-            setError(json.error)
+    useEffect(() => {
+        if (data) {
+            localStorage.setItem('user', JSON.stringify(data));
+            dispatch({ type: 'LOGIN', payload: data });
         }
-        if (response.ok) {
+    }, [data, dispatch]);
 
-            localStorage.setItem('user', JSON.stringify(json))
-            setsuccess('User has been created successfully')
-            dispatch({
-                type: 'LOGIN',
-                payload: json
-            })
+    const signup = (name, email, username, password, role) => execute({ name, email, username, password, role });
 
-            setIsLoading(false)
-        }
-    }
-    return { signup, isLoading, error, success }
-}
+    return { signup, isLoading, error };
+};
 
 export default useSignup
