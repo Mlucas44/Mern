@@ -11,11 +11,11 @@ import './Admin.scss';
 
 
 const Admin = () => {
-     // Hooks pour le chargement des données et la gestion des erreurs
+    // Hooks pour le chargement des données et la gestion des erreurs
     const { users, fetchUsers, checkEmailExists, isLoading, error, updateUser, deleteUser, addUser } = useUsers();
     // State declarations
     // 1. User management state variables
-    const [newUser, setNewUser] = useState({name: '', username: '', email: '', password: '', role: ''});
+    const [newUser, setNewUser] = useState({ name: '', username: '', email: '', password: '', role: '' });
     const [updatedUser, setUpdatedUser] = useState({});
     const [deletingUser, setDeletingUser] = useState(null);
 
@@ -29,22 +29,22 @@ const Admin = () => {
     const handleAddUser = async (event) => {
         event.preventDefault();
         const { name, username, email, password, role } = newUser;
-    
+
         if (!name || !username || !email || !password || !role) {
             toast.error('Tous les champs doivent être remplis');
-            return; 
+            return;
         }
-    
+
         if (!validator.isEmail(email)) {
             toast.error('Email n\'est pas valide');
-            return; 
+            return;
         }
-    
+
         if (!validator.isStrongPassword(password)) {
             toast.error('Le mot de passe n\'est pas assez fort');
-            return; 
+            return;
         }
-    
+
         // Vérifier si l'email existe déjà
         const emailExists = await checkEmailExists(email);
         if (emailExists) {
@@ -54,7 +54,7 @@ const Admin = () => {
         addUser(newUser);
         toast.success('L\'utilisateur a bien été ajouté')
         setAddModalShow(false);
-        setNewUser({name: '', username: '', email: '', password: '', role: ''});
+        setNewUser({ name: '', username: '', email: '', password: '', role: '' });
     };
     const handleNewUserChange = (event) => {
         setNewUser({
@@ -85,10 +85,10 @@ const Admin = () => {
     };
     const handleEditChange = (event) => {
         setUpdatedUser({
-          ...updatedUser,
-          [event.target.name]: event.target.value,
+            ...updatedUser,
+            [event.target.name]: event.target.value,
         });
-      };
+    };
     // 2. Filter handler
     const handleFilterChange = (event) => {
         const filterText = event.target.value.toLowerCase();
@@ -106,43 +106,42 @@ const Admin = () => {
     useEffect(() => {
         setFilteredUsers(users);
     }, [users]);
- 
+
     if (error) {
         return <div>Error: {error}</div>
     }
-    
+
     return (
         <div className="admin-container">
-            <ToastContainer/>
-            <h1>Page d'administration</h1>
-            <h2>Liste des utilisateurs</h2>
+            <ToastContainer />
+            <h1>Liste des utilisateurs</h1>
 
             <UserTable
-            users={filteredUsers}
-            handleFilterChange={handleFilterChange}
-            setAddModalShow={setAddModalShow}
-            onDeleteClick={handleDeleteClick}
-            onEditClick={handleEditModalShow}
-            isLoading={isLoading}
+                users={filteredUsers}
+                handleFilterChange={handleFilterChange}
+                setAddModalShow={setAddModalShow}
+                onDeleteClick={handleDeleteClick}
+                onEditClick={handleEditModalShow}
+                isLoading={isLoading}
             />
 
 
-            <DeleteUserModal 
-                show={deleteModalShow} 
+            <DeleteUserModal
+                show={deleteModalShow}
                 handleClose={() => setDeleteModalShow(false)}
                 deletingUser={deletingUser}
                 handleDeleteConfirm={handleDeleteConfirm}
             />
 
-            <AddUserModal 
-                show={addModalShow} 
+            <AddUserModal
+                show={addModalShow}
                 handleClose={() => setAddModalShow(false)}
                 handleAddUser={handleAddUser}
                 handleNewUserChange={handleNewUserChange}
             />
 
-            <EditUserModal 
-                show={editModalShow} 
+            <EditUserModal
+                show={editModalShow}
                 handleClose={() => setEditModalShow(false)}
                 updatedUser={updatedUser}
                 handleEditChange={handleEditChange}

@@ -9,7 +9,7 @@ const Home = () => {
         <>
             <Hero />
             <main className="container">
-                <Cta />
+
             </main>
         </>
     )
@@ -41,10 +41,5 @@ const Hero = () => {
     )
 }
 
-const Cta = () => {
-    return (
-        <h1>Cta</h1>
-    )
-}
 
 export default Home
