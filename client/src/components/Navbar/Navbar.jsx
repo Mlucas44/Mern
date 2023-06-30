@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import avatar from './../../images/avatar.jpg'
 import { NavLink } from 'react-router-dom'
 import './navbar.scss'
-import {useLogout}  from './../../hooks/useLogout'
+import { useLogout } from './../../hooks/useLogout'
 import useAuthContext from './../../hooks/useAuthContext'
 
 const Navbar = ({ userInfo }) => {
@@ -24,14 +24,14 @@ const Navbar = ({ userInfo }) => {
                   <NavLink to="/" className='menu-item'>Home</NavLink>
                 </li>
                 {userInfo && userInfo.role === 'admin' && (
-                <li>
-                <NavLink to="/admin" className='menu-item'>Admin</NavLink>
-                </li>
-            )}
+                  <li>
+                    <NavLink to="/admin" className='menu-item'>Admin</NavLink>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
-          {userInfo && (<DropdownMenu />)}
+          {userInfo && (<DropdownMenu userInfo={userInfo} />)}
           {!userInfo && (<LoginMenu />)}
         </nav>
       </div>
@@ -39,53 +39,48 @@ const Navbar = ({ userInfo }) => {
   )
 }
 
-const DropdownMenu = () => {
-const {user} = useAuthContext()
-const {logout} = useLogout()
-const handleclick = () =>{
-  logout()
-}
+const DropdownMenu = ({ userInfo }) => {
+  const { user } = useAuthContext()
+  const { logout } = useLogout()
+  const handleclick = () => {
+    logout()
+  }
   const [open, setopen] = useState('');
   //it will help to show and hide dropdown menu bar.
-  function Toggle_dropdown(){
-    (open === "active")? setopen('') : setopen('active');
+  function Toggle_dropdown() {
+    (open === "active") ? setopen('') : setopen('active');
   }
-  
+
   return (
     <>
-    <div className="right-menu">
-      <div className="dropdown-menu" onClick={() => Toggle_dropdown()}>
-        <div className="user-pic">
-          <img src={avatar} alt="" />
+      <div className="right-menu">
+        <div className="dropdown-menu" onClick={() => Toggle_dropdown()}>
+          <div className="user-pic">
+            <img src={avatar} alt="" />
+          </div>
+          <div className="user-data">
+            <span>{user.name}</span>
+          </div>
         </div>
-        <div className="user-data">
-          <span>{user.name}</span>
-          <span>{user.email}</span>
+        <div className={"drodown-box " + open}>
+          <ul className="dropdown-item">
+            <li>
+              <NavLink to="/profile">Mon profil</NavLink>
+            </li>
+            {userInfo && userInfo.role === 'admin' && (
+              <li>
+                <NavLink to="/admin" className='menu-item'>Admin</NavLink>
+              </li>
+            )}
+            <li>
+              <NavLink onClick={handleclick} className='btn btn-dark btn-icon'>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13h1a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1M6 11l3-3-3-3M8.5 8H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke"></path></svg>
+                <span>Logout</span>
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </div>
-      <div className={"drodown-box " + open}>
-        <ul className="dropdown-item">
-          <li>
-            <NavLink to="">My Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to="">Login Activity</NavLink>
-          </li>
-          <li>
-            <NavLink to="">profile</NavLink>
-          </li>
-          <li>
-            <NavLink to="">profile</NavLink>
-          </li>
-          <li>
-            <NavLink onClick={handleclick} className='btn btn-dark btn-icon'>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13h1a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1M6 11l3-3-3-3M8.5 8H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke"></path></svg>
-              <span>Logout</span>
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-    </div>
     </>
   )
 }
