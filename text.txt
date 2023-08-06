@@ -9,6 +9,5 @@ Issue a résoudre :
 - Problème d'actualisation (lorsque je suis sur la page admin et que j'actualise cela me met sur la page Home du a la recupération de l'utilisateur)
 - Action Modifier a revoir pages Admin (password)
 - voir doublon lors de l'ajout / creation de compte 
-- fonction remember me ? 
 - responsive page admin
 - Systeme d'erreur sur les modals admin remplacer toast par message rouge

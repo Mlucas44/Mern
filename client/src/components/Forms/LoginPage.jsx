@@ -10,10 +10,14 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 const LoginPage = () => {
   let navigate = useNavigate();
-  const [FormData, setFormData] = useState({
-    email: "",
-    password: ""
+  const [FormData, setFormData] = useState(() => {
+    const savedEmail = localStorage.getItem("email");
+    return {
+      email: savedEmail ? savedEmail : "",
+      password: "",
+    }
   });
+  const [rememberMe, setRememberMe] = useState(false);
   let name, value;
 
   const handleinput = (e) => {
@@ -29,12 +33,18 @@ const LoginPage = () => {
       toast.error(error, toast_property());
     }
   }, [error]);
-
+  const handleCheckbox = (e) => {
+    setRememberMe(e.target.checked);
+  }
   const LoginUser = async (e) => {
     e.preventDefault();
 
     const { email, password } = FormData;
     const response = await login(email, password);
+
+    if (response && !response.error && rememberMe) {
+      localStorage.setItem("email", email);
+    }
 
     if (response && response.error) {
         console.log(response.error);
@@ -85,7 +95,7 @@ const LoginPage = () => {
                 <FontAwesomeIcon icon={faExclamationTriangle} /> {errorMessages[error.error] || error.error}
               </p>}
               <div className="input-group">
-                <input type="checkbox" name="term" id="term" />
+                <input type="checkbox" checked={rememberMe} onChange={handleCheckbox} name="term" id="term" />
                 <label htmlFor='term' className="checkbox">
                   Remember me
                 </label>
