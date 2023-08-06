@@ -25,11 +25,12 @@ const useApiRequest = (url, method) => {
         if (!response.ok) {
             const error = await response.json();
             setError(error);
-            return;
+            return { error };
         }
 
         const responseData = await response.json();
         setData(responseData);
+        return { data: responseData };
     }, [url, method]);
 
     return { isLoading, error, data, execute };

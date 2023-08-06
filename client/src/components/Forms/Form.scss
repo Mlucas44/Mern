@@ -4,6 +4,10 @@
     justify-content: center;
     height: 80vh;
 
+    .error-message {
+        color: red;
+      }
+
     .form-box {
         min-width: 400px;
         background-color: #fff;
