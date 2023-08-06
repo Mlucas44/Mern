@@ -10,4 +10,4 @@ Issue a résoudre :
 - Action Modifier a revoir pages Admin (password)
 - voir doublon lors de l'ajout / creation de compte 
 - responsive page admin
-- Systeme d'erreur sur les modals admin remplacer toast par message rouge
+- Systeme d'erreur sur les modals admin remplacer toast par message rouges
