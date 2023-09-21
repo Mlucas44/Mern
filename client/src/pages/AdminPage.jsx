@@ -1,5 +1,5 @@
 import React from 'react'
-import Admin from './../components/Admin/Admin' 
+import Admin from '../components/Admin/Admin' 
 
 const AdminPage = ({userInfo}) => {
     // Ici, vous récupérerez la liste des utilisateurs depuis l'API, 

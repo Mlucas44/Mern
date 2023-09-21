@@ -11,9 +11,11 @@ body {
 }
 
 .navbar {
-    max-width: 80rem;
+    //max-width: 80rem;
+    //height: 60px; // ou utilisez min-height selon vos préférences
+
     margin: auto;
-    padding: 0 2.5rem;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +23,7 @@ body {
     .nav-flex {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 1rem;
 
         .logo {
             display: flex;
@@ -31,14 +33,14 @@ body {
             .logo-item {
                 width: 2.5rem;
                 height: 2.5rem;
-                padding: .5rem;
+                padding: 0.5rem;
                 border-radius: 50%;
                 display: block;
                 background: $bglight-color;
             }
 
             h1 {
-                font-size: 20px;
+                font-size: 18px;
                 line-height: 1.25rem;
                 font-weight: 500;
             }
@@ -54,11 +56,12 @@ body {
                     list-style: none;
 
                     .menu-item {
-                        font-size: 0.95rem;
+                        font-size: 0.95rem; // était de 0.95rem
+                        padding: 1rem 0.5rem;
                         line-height: 1.25rem;
                         font-weight: 500;
                         text-transform: capitalize;
-                        padding: 1.5rem .75rem;
+                        
                         display: inline-block;
                         color: $gray-color;
                         position: relative;

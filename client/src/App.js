@@ -18,7 +18,7 @@ const App = () => {
       <Routes>
         <Route
           path='/'
-          element={user ? <HomePage /> : <Navigate to="/login" />} />
+          element={ <HomePage />} />
         <Route
           path='/login'
           element={!user ? <Login /> : <Navigate to="/" />} />
@@ -26,7 +26,7 @@ const App = () => {
           path='/signup'
           element={!user ? <Signup /> : <Navigate to="/" />} />
         <Route
-          path='/admin'
+          path='/admin/*'
           element={userInfo && userInfo.role === 'admin' ? <AdminPage /> : <Navigate to="/" />} />
         <Route
           path='/profile'
