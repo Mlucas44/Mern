@@ -24,7 +24,7 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
     const options = {
         custom: true,
         totalSize: users ? users.length : 0,
-        sizePerPage: 8 
+        sizePerPage: 10
     };
 
     const columns = [

@@ -114,5 +114,20 @@
   color: #888888;
 }
 
+.pagination-wrapper .pagination li.active a, .pagination-wrapper .pagination li.active span {
+  background-color: transparent;
+  border: 2px solid blue;
+  border-radius: 50%; /* Pour avoir un cercle */
+  color: blue;
+}
+
+.pagination-wrapper .pagination li a, .pagination-wrapper .pagination li span {
+  background-color: transparent; /* Pour enlever la couleur d'arrière-plan */
+  border: none; /* Pour enlever la bordure */
+}
+
+.pagination-wrapper .pagination li:hover a, .pagination-wrapper .pagination li:hover span {
+  background-color: #e6e6e6; /* Couleur d'arrière-plan lors du survol */
+}
 
 
