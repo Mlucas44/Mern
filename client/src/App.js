@@ -18,11 +18,7 @@ const App = () => {
       <Routes>
         <Route
           path='/'
-<<<<<<< HEAD
           element={ <HomePage />} />
-=======
-          element={<HomePage />} />
->>>>>>> 7e02b6a45769bd3e679dda753ebd149fb59b45b8
         <Route
           path='/login'
           element={!user ? <Login /> : <Navigate to="/" />} />

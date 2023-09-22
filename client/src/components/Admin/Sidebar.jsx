@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Sidebar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouseChimney,  faUser, faUserGear, faPeopleGroup, faFutbol, faNewspaper, faReceipt} from '@fortawesome/free-solid-svg-icons'
@@ -8,15 +8,13 @@ import {faHouseChimney,  faUser, faUserGear, faPeopleGroup, faFutbol, faNewspape
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <NavLink to="/admin/accueil" activeClassName="active-link"><FontAwesomeIcon className="fa-icon" icon={faHouseChimney}  />Accueil</NavLink>
-      <NavLink to="/admin/users" activeClassName="active-link"><FontAwesomeIcon className="fa-icon" icon={faUser} />Utilisateurs</NavLink>
-      <Link to="/admin/accueil"><FontAwesomeIcon className="fa-icon" icon={faHouseChimney}  />Accueil</Link>
-      <Link to="/admin/users"><FontAwesomeIcon className="fa-icon" icon={faUser} />Utilisateurs</Link>
-      <Link to="/admin/events"><FontAwesomeIcon className="fa-icon" icon={faUserGear} />Rôle</Link>
-      <Link to="/admin/players"><FontAwesomeIcon className="fa-icon" icon={faPeopleGroup}  />Equipe</Link>
-      <Link to="/admin/players"><FontAwesomeIcon className="fa-icon" icon={faFutbol} />Joueur</Link>
-      <Link to="/admin/players"><FontAwesomeIcon className="fa-icon" icon={faNewspaper} />Actualité</Link>
-      <Link to="/admin/players"><FontAwesomeIcon className="fa-icon" icon={faReceipt} />Convocation</Link>
+      <NavLink to="/admin/accueil" activeclassname="active"><FontAwesomeIcon className="fa-icon" icon={faHouseChimney} />Accueil</NavLink>
+      <NavLink to="/admin/users" activeclassname="active"><FontAwesomeIcon className="fa-icon" icon={faUser} />Utilisateurs</NavLink>
+      <NavLink to="/admin/events" activeclassname="active"><FontAwesomeIcon className="fa-icon" icon={faUserGear} />Rôle</NavLink>
+      <NavLink to="/admin/equipe" activeclassname="active"><FontAwesomeIcon className="fa-icon" icon={faPeopleGroup}  />Equipe</NavLink>
+      <NavLink to="/admin/joueur" activeclassname="active"><FontAwesomeIcon className="fa-icon" icon={faFutbol} />Joueur</NavLink>
+      <NavLink to="/admin/actualite" activeclassname="active"><FontAwesomeIcon className="fa-icon" icon={faNewspaper} />Actualité</NavLink>
+      <NavLink to="/admin/convocation" activeclassname="active"><FontAwesomeIcon className="fa-icon" icon={faReceipt} />Convocation</NavLink>
     </div>
   );
 };

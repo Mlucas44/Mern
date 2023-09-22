@@ -1,23 +1,22 @@
-.user-container {
-  padding: 1em;
-  width: 100%;
-  max-width: 80%;
-  margin: auto;
-  background-color: #868686;
-}
+// .user-container {
+//   padding: 1em;
+//   width: 100%;
+//   max-width: 80%;
+//   margin: auto;
+//   background-color: #868686;
+// }
 
 .user-table-container {
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 2em;
+  padding: 2em 2em 0.5em 2em;
   margin-bottom: 1em;
   max-width: 100%;
   margin: 0 auto;
-}
+  max-height: 100vh;
+  overflow-y: auto;
+  font-size: 0.85em; /* TAILLE POLICE TABLEAU */
 
-.sort-caret {
-  color: grey;
-  font-size: 0.7rem;
 }
 
 .pagination-wrapper {
@@ -38,8 +37,9 @@
   flex-grow: 1;
   position: relative;
   border: 1px solid #ddd;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 5px 10px;
+  background-color: #EDF5F8;
 }
 
 .search-add-wrapper .search-input input {
@@ -47,6 +47,7 @@
   outline: none;
   width: 100%; // La barre de recherche occupe tout l'espace disponible.
   padding-right: 30px; // Pour éviter que le texte n'aille sous l'icône
+  background-color: #EDF5F8;
 }
 
 .search-add-wrapper .search-input svg {
@@ -59,10 +60,12 @@
 }
 
 .search-add-wrapper button {
-  background-color: #221ECD; // change la couleur de fond du bouton
+  background-color: #50C878; // change la couleur de fond du bouton
   color: white; // change la couleur du texte du bouton
   border: none; // retire le bord du bouton
   margin-left: 1em;
+  font-size: 1em;   /* TAILLE BTN AJOUTER */
+  padding: 5px 8px; 
 }
 
 .user-table {
@@ -74,10 +77,17 @@
     border-right: none ;
     border-left: none ;
     border-bottom: 1px solid #dddddd ;
-  }
+    vertical-align: middle;   
 
+  }
+  td{
+    line-height: 1.2; /* réduire l'espace entre les lignes */
+    padding-top: 5px; /* réduire l'espace au-dessus du texte */
+    padding-bottom: 5px; /* réduire l'espace sous le texte */
+  }
+  
   thead th {
-    background-color: #f0f0f0 ;
+    background-color: #EDF5F8 ;
     color: #888888 ; // Couleur du texte des en-têtes de colonnes
   }
 }
@@ -86,8 +96,23 @@
   justify-content: center;
 
   button {
-    margin-left: 20px;
+    font-size: 0.8em; /* réduire la taille de la police du bouton */
+    padding: 4px 8px;
+   // margin-left: 20px;
   }
 }
+.pagination-wrapper .pagination li a, .pagination-wrapper .pagination li span {
+  font-size: 0.8em;   /* Réduction de la taille de la police */
+  padding: 4px 8px;   /* Réduction du padding */
+  margin: 0 2px;      /* Réduction des marges entre les boutons, ajustez si nécessaire */
+}
+
+.pagination-wrapper .pagination {
+  margin-bottom: 0;   /* Si nécessaire, élimine la marge en bas de la pagination pour la rendre plus compacte */
+}
+.pagination-wrapper span{
+  color: #888888;
+}
+
 
 

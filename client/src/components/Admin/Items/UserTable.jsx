@@ -23,7 +23,8 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
 
     const options = {
         custom: true,
-        totalSize: users ? users.length : 0
+        totalSize: users ? users.length : 0,
+        sizePerPage: 8 
     };
 
     const columns = [
@@ -31,31 +32,46 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
             dataField: 'name',
             text: 'Nom',
             sort: true,
-            sortCaret: sortCaret
+            sortCaret: sortCaret,
+            style: { 
+              width: '20%',
+            },
         },
         {
             dataField: 'email',
             text: 'Email',
             sort: true,
-            sortCaret: sortCaret
+            sortCaret: sortCaret,
+            style: { 
+              width: '30%',
+            },
         },
         {
             dataField: 'username',
             text: 'Username',
             sort: true,
-            sortCaret: sortCaret
+            sortCaret: sortCaret,
+            style: { 
+              width: '20%',
+            },
         },
         {
             dataField: 'role',
             text: 'Role',
             sort: true,
-            sortCaret: sortCaret
+            sortCaret: sortCaret,
+            style: { 
+              width: '20%',
+            },
         },
         {
             dataField: 'actions',
             text: 'Actions',
             isDummyField: true,
             csvExport: false,
+            style: { 
+              width: '10%',
+            },
             formatter: (cell, row) => {
                 return (
                     <div className="action-buttons">
@@ -79,7 +95,7 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
               <FaSearch />
             </div>
             <Button variant="primary" onClick={() => setAddModalShow(true)}>
-              <FontAwesomeIcon icon={faPlus} /> Ajouter un utilisateur
+              <FontAwesomeIcon icon={faPlus} /> Ajouter
             </Button>
           </div>
           {isLoading ? (
