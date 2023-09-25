@@ -5,7 +5,9 @@
 //   margin: auto;
 //   background-color: #868686;
 // }
-
+h3{
+  color: white;
+}
 .user-table-container {
   background-color: #ffffff;
   border-radius: 10px;
@@ -88,46 +90,57 @@
   
   thead th {
     background-color: #EDF5F8 ;
-    color: #888888 ; // Couleur du texte des en-têtes de colonnes
+    color: #000000 ; // Couleur du texte des en-têtes de colonnes
   }
 }
 .action-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; 
 
   button {
-    font-size: 0.8em; /* réduire la taille de la police du bouton */
+    font-size: 0.8em;
     padding: 4px 8px;
-   // margin-left: 20px;
+  }
+
+  button:nth-child(2) {
+    margin-left: 20px;
   }
 }
-.pagination-wrapper .pagination li a, .pagination-wrapper .pagination li span {
-  font-size: 0.8em;   /* Réduction de la taille de la police */
-  padding: 4px 8px;   /* Réduction du padding */
-  margin: 0 2px;      /* Réduction des marges entre les boutons, ajustez si nécessaire */
-}
 
-.pagination-wrapper .pagination {
-  margin-bottom: 0;   /* Si nécessaire, élimine la marge en bas de la pagination pour la rendre plus compacte */
-}
-.pagination-wrapper span{
+.pagination-wrapper .pagination li a, .pagination-wrapper .pagination li span {
+  font-size: 1em;
+  padding: 4px 10px; /* Augmentez le padding pour espacer les chiffres */
+  margin: 0 10px; /* Augmentez la marge pour espacer les boutons */
+  background-color: transparent; 
+  border: none;
   color: #888888;
+  border-radius: 50%;
+  outline: none; /* Supprimez le contour lors du focus */
 }
 
 .pagination-wrapper .pagination li.active a, .pagination-wrapper .pagination li.active span {
-  background-color: transparent;
-  border: 2px solid blue;
-  border-radius: 50%; /* Pour avoir un cercle */
-  color: blue;
-}
-
-.pagination-wrapper .pagination li a, .pagination-wrapper .pagination li span {
-  background-color: transparent; /* Pour enlever la couleur d'arrière-plan */
-  border: none; /* Pour enlever la bordure */
+  background-color: #e6e6e6;
+  border: none;
+  color: black;
+  outline: none; /* Supprimez le contour lors du focus */
 }
 
 .pagination-wrapper .pagination li:hover a, .pagination-wrapper .pagination li:hover span {
-  background-color: #e6e6e6; /* Couleur d'arrière-plan lors du survol */
+  background-color: #e6e6e6;
+  color: black;
 }
+
+.pagination-wrapper .pagination {
+  margin-bottom: 0;
+}
+.pagination-wrapper .pagination li a:focus, 
+.pagination-wrapper .pagination li span:focus {
+    outline: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+
+
 
 
