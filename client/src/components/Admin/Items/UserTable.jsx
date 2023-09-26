@@ -75,7 +75,7 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
             formatter: (cell, row) => {
                 return (
                     <div className="action-buttons">
-                        <Button variant="primary" onClick={() => onEditClick(row)}>
+                        <Button onClick={() => onEditClick(row)}>
                             <FontAwesomeIcon icon={faPencilAlt} />
                         </Button>
                         <Button variant="danger" onClick={() => onDeleteClick(row)}>
