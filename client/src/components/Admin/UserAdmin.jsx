@@ -114,7 +114,7 @@ const UserAdmin = () => {
     return (
         <div className="user-container">
             <ToastContainer />
-            <h3>Liste des utilisateurs  ({users ? users.length : 0})</h3>
+            
 
             <UserTable
                 users={filteredUsers}

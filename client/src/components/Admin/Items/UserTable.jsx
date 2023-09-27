@@ -4,9 +4,8 @@ import paginationFactory, { PaginationProvider, PaginationTotalStandalone, Pagin
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp, faArrowDown, faPencilAlt, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp, faArrowDown, faPencilAlt, faTrash, faPlus,  faUser } from '@fortawesome/free-solid-svg-icons'
 import { FaSearch } from 'react-icons/fa';
-
 
 const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, onEditClick, isLoading }) => {
     function sortCaret(order) {
@@ -89,6 +88,8 @@ const UserTable = ({ users, handleFilterChange, setAddModalShow, onDeleteClick, 
 
     return (
         <div className="user-table-container">
+          <h3 className="user-table-title"><FontAwesomeIcon className="fa-icon" icon={faUser} /> Liste des utilisateurs  ({users ? users.length : 0})</h3>
+          <div className="underline"></div>
           <div className="search-add-wrapper">
             <div className="search-input">
               <input type="text" placeholder="Rechercher..." onChange={handleFilterChange} />
