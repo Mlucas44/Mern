@@ -1,7 +1,7 @@
 .user-table-container {
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 2em 2em 0.5em 2em;
+  //padding: 2em 2em 0.5em 2em;
   margin-bottom: 1em;
   max-width: 100%;
   margin: 0 auto;
@@ -15,7 +15,6 @@
   align-items: center;
   color: #0d2868;
 }
-// 06163A
 
 .underline {
   width: 100%;
@@ -156,6 +155,26 @@
     -webkit-box-shadow: none;
 }
 
+/* Pour les écrans d'ordinateurs de taille moyenne */
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+  .user-table-container {
+    padding: 1.5em 1.5em 0.5em 1.5kem;
+  }
+}
+
+/* Pour les écrans d'ordinateurs plus grands */
+@media screen and (min-width: 1367px) and (max-width: 1600px) {
+  .user-table-container {
+    padding: 2em 2em 0.5em 2em;
+  }
+}
+
+/* Pour les écrans d'ordinateurs encore plus grands */
+@media screen and (min-width: 1601px) and (max-width: 1920px) {
+  .user-table-container {
+    padding: 2.5em 2.5em 0.5em 2.5em;
+  }
+}
 
 
 
