@@ -1,13 +1,13 @@
 .admin-container {
-    display: flex; // Cela fera en sorte que les enfants directs (la barre latérale et le wrapper du contenu) soient affichés côte à côte.
-    height: calc(100vh - 4.35rem); // Pour s'assurer que le conteneur s'étend sur toute la hauteur de la fenêtre du navigateur.
-    
+    display: flex; 
+    //height: calc(100vh - 4.35rem);
+    margin-top: 4.35rem;
     .content-wrapper {
-      flex: 1; // Prend le reste de l'espace après la barre latérale.
+      flex: 1;
       background: url(banner/fond1.jpg);
       background-size: cover;
-      background-color: #EDF5F8; // Une couleur de fond gris clair pour votre accueil.
-      overflow-y: auto; // Permet le défilement si le contenu est trop long.
+      background-color: #EDF5F8;
+      overflow-y: auto;
       padding: 20px 30px 0px 30px;
     }
   }

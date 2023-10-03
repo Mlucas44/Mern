@@ -1,45 +1,75 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import heroimg from './../../images/hero.png'
-import './Home.scss'
+import React, { useEffect, useRef } from 'react';
+import Home1 from './home1.jpg';
+import Home2 from './home2.jpg';
+import Home3 from './home3.jpg';
+import './Home.scss';
+import Slider from 'react-slick';
+
+const ProgressBar = ({ duration, reset }) => {
+    const progressRef = useRef(null);
+
+    useEffect(() => {
+        progressRef.current.style.width = '0%';
+
+        const interval = setInterval(() => {
+            if (progressRef.current) {
+                const currentWidth = progressRef.current.style.width || "0%";
+                const increment = 100 / (duration / 100);
+                const newWidth = Math.min(100, parseFloat(currentWidth) + increment) + "%";
+                progressRef.current.style.width = newWidth;
+            }
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, [duration, reset]);
+
+    return <div className="progress-container">
+        <div className="progress" ref={progressRef}></div>
+    </div>;
+};
 
 const Home = () => {
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 2000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: true,
+        afterChange: () => { if (document.querySelector(".progress")) document.querySelector(".progress").style.width = "0%"; }, // Reset progress bar after slide change
+        beforeChange: () => setResetFlag(prev => !prev) 
+    };
+    const [resetFlag, setResetFlag] = React.useState(false);
+    const slideDisplayDuration = settings.autoplaySpeed;
 
     return (
-        <>
-            <Hero />
-            <main className="container">
-
-            </main>
-        </>
-    )
-}
-
-const Hero = () => {
-    return (
-        <>
-            <div className="container">
-                <div className="header-content">
-                    <div className="text-content">
-                        <h1>Mern profile manager collaborative app</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, minus. Itaque, rerum atque nesciunt ut maxime sit asperiores accusantium labore.</p>
-                        <div className="right-menu">
-                            <NavLink to="" className='btn btn-dark btn-icon'>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13h1a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1M6 11l3-3-3-3M8.5 8H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke"></path></svg>
-                                <span>Sign in</span>
-                            </NavLink>
-                            <NavLink to="" className='btn btn-light'>Sign up</NavLink>
-
+        <div>
+            <div className="carousel-fixed-container">
+                <div className="carousel-container">
+                    <Slider {...settings}>
+                        <div className="slide-container">
+                            <h2>Title 1</h2>
+                            <img src={Home1} alt="Description 1" />
+                            <ProgressBar duration={slideDisplayDuration} reset={resetFlag} />
                         </div>
-                    </div>
-                    <div className="img-content">
-                        <img src={heroimg} alt="" />
-                    </div>
+                        <div className="slide-container">
+                            <h2>Title 2</h2>
+                            <img src={Home2} alt="Description 2" />
+                            <ProgressBar duration={slideDisplayDuration} reset={resetFlag} />
+                        </div>
+                        <div className="slide-container">
+                            <h2>Title 3</h2>
+                            <img src={Home3} alt="Description 3" />
+                            <ProgressBar duration={slideDisplayDuration} reset={resetFlag} />
+                        </div>
+                    </Slider>
                 </div>
             </div>
-        </>
-    )
+            
+        </div>
+    );
 }
 
-
-export default Home
+export default Home;

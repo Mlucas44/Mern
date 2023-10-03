@@ -5,6 +5,11 @@ body {
 }
 
 .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     border-bottom: 2px solid rgba(0, 0, 0, 0.05);
     background-color: $white-color;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, .05);
