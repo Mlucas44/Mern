@@ -1,52 +1,118 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-.carousel-fixed-container {
-    width: 100vw; 
-    height: 100vh;
-    overflow: hidden;
+.home-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 
-    .carousel-container {
-        width: 100%;
-        height: 100%;
+  // Texte sur images
+  .slide-content {
+    position: relative;
 
-        .slick-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            position: relative;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            h2 {
-                position: absolute;
-                top: 10%;
-                left: 50%;
-                transform: translateX(-50%);
-                color: white; // or any color you like
-                z-index: 10; // to ensure it appears on top
-            }
-
-            .progress-container {
-                position: absolute;
-                bottom: 30%;
-                left: 5%;
-                width: 90%;
-                height: 5px;
-                background-color: rgba(255, 255, 255, 0.3); // Fond semi-transparent pour visualiser le conteneur même si la barre de progression est à 0%
-            
-                .progress {
-                    width: 0;
-                    height: 100%;
-                    background-color: white; 
-                    transition: width 0.1s; // Ajout d'une petite animation pour une transition en douceur
-                }
-            }
-        }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1;
     }
+
+    .background-image {
+      z-index: 0;
+    }
+    .slide-info {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      z-index: 2;
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .learn-more-btn {
+        padding: 10px 15px;
+        background-color: #48801b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #335a13;
+        }
+      }
+    }
+  }
+  // Barre de progression
+  .progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+
+    .progress-section {
+      flex: 1;
+      margin: 0 1px;
+      position: relative;
+
+      .progress-title {
+        position: absolute;
+        top: -25px;
+        left: 10px;
+        right: 0;
+        font-size: 18px;
+        text-transform: uppercase;
+        color: #fff;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background-color: #bdc3c7;
+        transition: width 100ms linear;
+      }
+    }
+
+    .progress-section .progress-bar.active {
+      background-color: #48801b;
+    }
+  }
+  // Btn suivant precedent
+  .slick-prev,
+  .slick-next {
+    top: 45%;
+    z-index: 10;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  .slick-prev {
+    left: 10px;
+  }
+
+  .slick-next {
+    right: 10px;
+  }
 }
