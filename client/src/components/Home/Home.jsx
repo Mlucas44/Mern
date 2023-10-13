@@ -67,7 +67,6 @@ const Home = () => {
   // Effet pour mettre à jour la barre de progression du diaporama
   useEffect(() => {
     if (progress < 100 && settings.autoplay) {
-      console.log("Progress:", progress);
       const timer = setTimeout(() => {
         setProgress(progress + 100 / (effectiveAutoplaySpeed / 100));
       }, 100);
