@@ -58,11 +58,14 @@ const Home = () => {
     arrows: true,
     nextArrow: <ArrowRight />,
     prevArrow: <ArrowLeft />,
-    beforeChange: (next) => {
-      setCurrentSlide(next);
-      setProgress(0);
+    beforeChange: (current, next) => {
+      setProgress(0); // Réinitialisez la progression avant le changement de diapositive
+    },
+    afterChange: (current) => {
+      setCurrentSlide(current); // Mettez à jour currentSlide après la transition
     },
   };
+  console.log(currentSlide);
   const effectiveAutoplaySpeed = settings.autoplaySpeed - settings.speed;
   // Effet pour mettre à jour la barre de progression du diaporama
   useEffect(() => {
