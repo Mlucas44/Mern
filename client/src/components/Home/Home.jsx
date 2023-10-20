@@ -65,7 +65,6 @@ const Home = () => {
       setCurrentSlide(current); // Mettez à jour currentSlide après la transition
     },
   };
-  console.log(currentSlide);
   const effectiveAutoplaySpeed = settings.autoplaySpeed - settings.speed;
   // Effet pour mettre à jour la barre de progression du diaporama
   useEffect(() => {
@@ -106,10 +105,77 @@ const Home = () => {
       </div>
     ));
 
+  const NewContainer = () => {
+    return (
+      <div className="new-container">
+        <h2>Mon Nouveau Conteneur</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          pharetra hendrerit velit et vestibulum. Maecenas ultricies mi id
+          libero feugiat lobortis. Vestibulum iaculis purus quis est ultricies,
+          vel varius purus porttitor. Nullam leo diam, consequat et nisi non,
+          sodales sollicitudin orci. Vivamus eget porttitor nunc, ac rhoncus
+          quam. Praesent eget mollis odio. Nullam at accumsan ipsum. Vestibulum
+          at justo ut mauris ultricies fringilla pulvinar non lorem. Mauris sit
+          amet est vitae elit hendrerit porttitor facilisis eu libero. Aliquam
+          tristique enim lectus, id suscipit ante consequat ut. Nulla facilisi.
+          Mauris ut tristique lectus. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Nullam eu mi metus. Orci varius natoque penatibus et
+          magnis dis parturient montes, nascetur ridiculus mus. Curabitur varius
+          tellus ex, ultricies interdum leo pretium sed. Nam mollis interdum
+          feugiat. Aliquam vitae enim non lectus convallis tempor. Proin leo
+          metus, varius ac finibus ac, porttitor non elit. Nam non hendrerit
+          erat, sit amet faucibus metus. Aliquam vel finibus lacus, non
+          tincidunt odio. Nam sit amet arcu ac lectus vehicula porttitor.
+          Praesent vestibulum risus et tincidunt maximus.Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. Pellentesque pharetra hendrerit
+          velit et vestibulum. Maecenas ultricies mi id libero feugiat lobortis.
+          Vestibulum iaculis purus quis est ultricies, vel varius purus
+          porttitor. Nullam leo diam, consequat et nisi non, sodales
+          sollicitudin orci. Vivamus eget porttitor nunc, ac rhoncus quam.
+          Praesent eget mollis odio. Nullam at accumsan ipsum. Vestibulum at
+          justo ut mauris ultricies fringilla pulvinar non lorem. Mauris sit
+          amet est vitae elit hendrerit porttitor facilisis eu libero. Aliquam
+          tristique enim lectus, id suscipit ante consequat ut. Nulla facilisi.
+          Mauris ut tristique lectus. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Nullam eu mi metus. Orci varius natoque penatibus et
+          magnis dis parturient montes, nascetur ridiculus mus. Curabitur varius
+          tellus ex, ultricies interdum leo pretium sed. Nam mollis interdum
+          feugiat. Aliquam vitae enim non lectus convallis tempor. Proin leo
+          metus, varius ac finibus ac, porttitor non elit. Nam non hendrerit
+          erat, sit amet faucibus metus. Aliquam vel finibus lacus, non
+          tincidunt odio. Nam sit amet arcu ac lectus vehicula porttitor.
+          Praesent vestibulum risus et tincidunt maximus.Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. Pellentesque pharetra hendrerit
+          velit et vestibulum. Maecenas ultricies mi id libero feugiat lobortis.
+          Vestibulum iaculis purus quis est ultricies, vel varius purus
+          porttitor. Nullam leo diam, consequat et nisi non, sodales
+          sollicitudin orci. Vivamus eget porttitor nunc, ac rhoncus quam.
+          Praesent eget mollis odio. Nullam at accumsan ipsum. Vestibulum at
+          justo ut mauris ultricies fringilla pulvinar non lorem. Mauris sit
+          amet est vitae elit hendrerit porttitor facilisis eu libero. Aliquam
+          tristique enim lectus, id suscipit ante consequat ut. Nulla facilisi.
+          Mauris ut tristique lectus. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Nullam eu mi metus. Orci varius natoque penatibus et
+          magnis dis parturient montes, nascetur ridiculus mus. Curabitur varius
+          tellus ex, ultricies interdum leo pretium sed. Nam mollis interdum
+          feugiat. Aliquam vitae enim non lectus convallis tempor. Proin leo
+          metus, varius ac finibus ac, porttitor non elit. Nam non hendrerit
+          erat, sit amet faucibus metus. Aliquam vel finibus lacus, non
+          tincidunt odio. Nam sit amet arcu ac lectus vehicula porttitor.
+          Praesent vestibulum risus et tincidunt maximus.
+        </p>
+      </div>
+    );
+  };
+
   return (
-    <div className="home-container">
-      <Slider {...settings}>{renderSlides()}</Slider>
-      <div className="progress-container">{renderProgressBars()}</div>
+    <div className="test">
+      <div className="home-container">
+        <Slider {...settings}>{renderSlides()}</Slider>
+        <div className="progress-container">{renderProgressBars()}</div>
+      </div>
+      <NewContainer /> {/* Ajoutez cette ligne */}
     </div>
   );
 };

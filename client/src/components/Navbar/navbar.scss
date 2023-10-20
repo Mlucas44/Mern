@@ -1,113 +1,180 @@
 @import './../../scss/_variable.scss';
 
-body {
-    background-color: $bg-color;
-}
-
 .nav-container {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-    background-color: $white-color;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, .05);
-}
+    background-color: transparent;
+    transition: background-color 0.5s ease;
 
-.navbar-logo {
-    height: 50px;    
-    width: auto; 
-}
-
-.navbar {
-    margin: auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    .logo-item {
-        width: 2.5rem;
-        height: 2.5rem;
-        padding: 0.5rem;
-        border-radius: 50%;
-        display: block;
-        background: $bglight-color;
+    &.scrolled {
+        background-blend-mode: multiply;
+        background-color: rgba(0, 0, 0, .3);
+        background-image: linear-gradient(90deg, #48801b, #48801b);
     }
 
-    h1 {
-        font-size: 18px;
-        line-height: 1.25rem;
-        font-weight: 500;
+    a, span, svg {
+        color: white !important; 
     }
-}
 
-.primary-menu {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-
-    .menu {
+    .navbar {
+        margin: auto;
+        padding: 0 1.5rem;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
+        width: 100%;
+
+        .left-menu, .center-menu, .right-menu {
+            display: flex;
+            align-items: center;
+        }
+        .left-menu{
+            .cursor-pointer {
+                cursor: pointer;
+            }
+        }
+        .center-menu {
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .navbar-logo {
+            height: 50px;    
+            width: auto; 
+        }
+    }
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: #333;
+    transition: left 0.3s;
+    z-index: 2000;
+    background-color: #48801B;
+
+    &.open {
+        left: 0;
+    }
+    .menu-header {
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+
+        .menu-title {
+            color: white;
+            font-weight: bold;
+        }
+
+        .close-menu-icon {
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+        }
+    }
+
+    .menu-list {
+        list-style: none;
+        padding-left: 0;
 
         li {
-            list-style: none;
+            position: relative;
+            .menu-item-container, .submenu li {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: transparent;
+                transition: background-color 0.3s;
+                padding: 10px 20px; 
+                cursor: pointer;
 
-            .menu-item {
-                font-size: 0.95rem; 
-                padding: 1rem 0.5rem;
-                line-height: 1.25rem;
-                font-weight: 500;
-                text-transform: capitalize;
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.3);  // blanc transparent
+                    a, span {
+                        color: #48801B;
+                        text-decoration: none !important; // assurez-vous qu'il n'y a pas de soulignement
+                    }
+                }
+            }
 
-                display: inline-block;
-                color: $gray-color;
-                position: relative;
+            a {
+                color: white;
+                text-decoration: none;
+                flex-grow: 1; 
 
-                &::after {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    background: $light-gray-color;
-                    width: 100%;
-                    height: 3px;
-                    display: none;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .arrow {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            &.expandable {
+                .arrow {
+                    cursor: pointer;
+                    transition: transform 0.3s;
                 }
 
-                &:hover::after {
-                    display: block;
+                &.expanded {
+                    .arrow {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            .submenu {
+                display: none; // cachez-le par défaut
+                list-style: none;
+                padding-left: 20px;
+
+                &.open {
+                    display: block; // affichez-le lorsque la classe open est ajoutée
                 }
 
-                &.active {
-                    color: $seconday-color;
+                li {
+                    padding: 5px 0;
                 }
+            }
 
-                &.active::after {
-                    color: $seconday-color;
-                    background-color: $seconday-color;
-                    display: block;
+            a {
+                color: white;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
                 }
             }
         }
     }
 }
+
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 1500; 
+}
+
 .right-menu {
     display: flex;
     gap: 2rem;
-    border: none;
-    outline: none; 
+
     .btn {
         background-color: $bglight-color;
         padding: 0.6rem 2rem;
@@ -126,97 +193,4 @@ body {
             align-items: center;
         }
     }
-
-    .dropdown-menu {
-        position: relative;
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        cursor: pointer;
-
-        .user-pic {
-            width: 50px;
-            height: 50px;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-        }
-
-        .user-data {
-            display: flex;
-            flex-direction: column;
-            color: $gray-color;
-        }
-    }
-
-    .drodown-box {
-        position: absolute;
-        min-height: 250px;
-        background: $white-color;
-        width: -webkit-fill-available;
-        margin-right: 2rem;
-        border-radius: 4px;
-        box-shadow: 2px 2px 5px $gray-color;
-        top: 65px;
-        display: none;
-        z-index: 10;
-
-        &.active {
-            display: block;
-        }
-
-        .dropdown-item {
-            display: flex;
-            flex-direction: column;
-            list-style: none;
-
-            li {
-                padding: 0px 20px;
-
-                &:first-child {
-                    padding-top: 10px;
-                }
-
-                &:last-child {
-                    padding: 16px;
-                    background: $bglight-color;
-                }
-
-                a {
-                    padding: 12px 4px;
-                    display: block;
-
-                    &.btn {
-                        display: flex;
-                        justify-content: center;
-                    }
-                }
-            }
-        }
-    }
 }
-/* Pour les écrans d'ordinateurs de taille moyenne */
-@media screen and (min-width: 1025px) and (max-width: 1366px) {
-    .menu {
-        gap: 4rem;
-    }
-}
-  
-/* Pour les écrans d'ordinateurs plus grands */
-@media screen and (min-width: 1367px) and (max-width: 1600px) {
-    .menu {
-        gap: 5rem;
-    }
-}
-  
-  /* Pour les écrans d'ordinateurs encore plus grands */
-  @media screen and (min-width: 1601px) and (max-width: 1920px) {
-    .menu {
-        gap: 6rem;
-    }
-}
-
