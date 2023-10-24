@@ -104,11 +104,11 @@ const SideMenu = ({ isOpen, setIsMenuOpen }) => {
       </div>
 
       <ul className="menu-list">
-        <li>
-          <div className="menu-item-container">
+        <div>
+          <li className="menu-item-container">
             <NavLink to="/">ACCUEIL</NavLink>
-          </div>
-        </li>
+          </li>
+        </div>
         <li
           className="expandable"
           onClick={() => setClubExpanded(!isClubExpanded)}
@@ -116,7 +116,7 @@ const SideMenu = ({ isOpen, setIsMenuOpen }) => {
           <div className="menu-item-container">
             CLUB
             <span className={`arrow ${isClubExpanded ? "expanded" : ""}`}>
-              <ArrowDownIcon width="18" height="18" />
+              <ArrowDownIcon width="14" height="8" />
             </span>
           </div>
           <ul className={`submenu ${isClubExpanded ? "open" : ""}`}>

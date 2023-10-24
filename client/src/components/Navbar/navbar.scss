@@ -51,24 +51,26 @@
 .side-menu {
     position: fixed;
     top: 0;
-    left: -300px;
-    width: 300px;
+    left: -24rem;
+    width: 24rem;
+    max-width: 24rem;
     height: 100vh;
     background-color: #333;
     transition: left 0.3s;
     z-index: 2000;
     background-color: #48801B;
-
+    font-size: 1rem;
     &.open {
         left: 0;
     }
     .menu-header {
-        padding: 10px 20px;
+        height: 4rem;
+        //padding: 10px 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
-
+        padding-left: 2.5rem;
         .menu-title {
             color: white;
             font-weight: bold;
@@ -94,13 +96,14 @@
                 background-color: transparent;
                 transition: background-color 0.3s;
                 padding: 10px 20px; 
+                color: white;
                 cursor: pointer;
 
                 &:hover {
-                    background-color: rgba(255, 255, 255, 0.3);  // blanc transparent
+                    background-color: rgba(255, 255, 255, 0.3);  
                     a, span {
                         color: #48801B;
-                        text-decoration: none !important; // assurez-vous qu'il n'y a pas de soulignement
+                        text-decoration: none !important; 
                     }
                 }
             }
@@ -135,16 +138,17 @@
             }
 
             .submenu {
-                display: none; // cachez-le par défaut
+                display: none;
                 list-style: none;
-                padding-left: 20px;
+                padding-left: 0px;
+                background-color: rgba(255, 255, 255, 0.1);
 
                 &.open {
                     display: block; // affichez-le lorsque la classe open est ajoutée
                 }
 
                 li {
-                    padding: 5px 0;
+                    padding: 10px 0;
                 }
             }
 
@@ -161,36 +165,4 @@
 }
 
 
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); 
-    z-index: 1500; 
-}
 
-.right-menu {
-    display: flex;
-    gap: 2rem;
-
-    .btn {
-        background-color: $bglight-color;
-        padding: 0.6rem 2rem;
-        cursor: pointer;
-        border-radius: 0.4rem;
-
-        &.btn-dark {
-            color: $bg-color;
-            background-color: $seconday-color;
-        }
-
-        &.btn-icon {
-            display: flex;
-            padding: .75rem 1.25rem;
-            gap: .4rem;
-            align-items: center;
-        }
-    }
-}
