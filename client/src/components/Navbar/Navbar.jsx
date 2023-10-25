@@ -7,6 +7,7 @@ import TwitterIcon from "./TwitterIcon";
 import YoutubeIcon from "./YoutubeIcon";
 import MenuIcon from "./MenuIcon";
 import ArrowDownIcon from "./ArrowDownIcon";
+import CrossIcon from "./CrossIcon";
 import logo from "./logo.png";
 
 const Navbar = ({ userInfo }) => {
@@ -26,7 +27,7 @@ const Navbar = ({ userInfo }) => {
     const handleOutsideClick = (event) => {
       if (
         isMenuOpen &&
-        !document.querySelector(".side-menu").contains(event.target)
+        !document.querySelector(".slide-menu").contains(event.target)
       ) {
         setIsMenuOpen(false);
       }
@@ -93,50 +94,115 @@ const Navbar = ({ userInfo }) => {
 
 const SideMenu = ({ isOpen, setIsMenuOpen }) => {
   const [isClubExpanded, setClubExpanded] = useState(false);
+  const [isSeniorExpanded, setSeniorExpanded] = useState(false);
 
   return (
-    <div className={`side-menu ${isOpen ? "open" : ""}`}>
-      <div className="menu-header">
-        <span className="menu-title">MENU</span>
-        <span className="close-menu-icon" onClick={() => setIsMenuOpen(false)}>
-          ✖
-        </span>
-      </div>
-
-      <ul className="menu-list">
-        <div>
-          <li className="menu-item-container">
-            <NavLink to="/">ACCUEIL</NavLink>
-          </li>
+    <div className={`slide-menu ${isOpen ? "open" : ""}`}>
+      <div className="menu-content">
+        <div className="menu-header">
+          <CrossIcon
+            width="20"
+            height="20"
+            onClick={() => setIsMenuOpen(false)}
+            className="close-menu-icon"
+          />
+          <span>MENU</span>
         </div>
-        <li
-          className="expandable"
-          onClick={() => setClubExpanded(!isClubExpanded)}
-        >
-          <div className="menu-item-container">
-            CLUB
-            <span className={`arrow ${isClubExpanded ? "expanded" : ""}`}>
-              <ArrowDownIcon width="14" height="8" />
-            </span>
-          </div>
-          <ul className={`submenu ${isClubExpanded ? "open" : ""}`}>
-            <li>
-              <NavLink to="/historique">HISTORIQUE</NavLink>
+        <nav className="menu-list">
+          <ul className="list">
+            <li className="menu-catégorie">
+              <div
+                className="menu-dropdown-header"
+                onClick={() => setClubExpanded(!isClubExpanded)}
+              >
+                <span> Club </span>
+                <ArrowDownIcon width="14" height="8" />
+              </div>
+              <div
+                className={`menu-sous-categorie ${
+                  isClubExpanded ? "open" : ""
+                }`}
+              >
+                <ul>
+                  <li>
+                    <NavLink to="/historique">HISTORIQUE</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/bureau">BUREAU</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/organigramme">ORGANIGRAMME</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/installation">INSTALLATION</NavLink>
+                  </li>
+                </ul>
+              </div>
             </li>
-            <li>
-              <NavLink to="/bureau">BUREAU</NavLink>
-            </li>
-            <li>
-              <NavLink to="/organigramme">ORGANIGRAMME</NavLink>
+            <li className="menu-catégorie">
+              <div
+                className="menu-dropdown-header"
+                onClick={() => setSeniorExpanded(!isSeniorExpanded)}
+              >
+                <span>SENIOR</span>
+                <ArrowDownIcon width="14" height="8" />
+              </div>
+              <div
+                className={`menu-sous-categorie ${
+                  isSeniorExpanded ? "open" : ""
+                }`}
+              >
+                <ul>
+                  <li>
+                    <NavLink to="/r1">R1</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/r2">R2</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/r3">R3</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/d2">D2</NavLink>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
-        </li>
-        <li>
-          <div className="menu-item-container">
-            <NavLink to="/connexion">CONNEXION</NavLink>
-          </div>
-        </li>
-      </ul>
+        </nav>
+      </div>
+      <div className="menu-secondary">
+        <ul className="social-media">
+          <li>
+            <a href="https://facebook.com">
+              <FacebookIcon />
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com">
+              <TwitterIcon />
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com">
+              <InstagramIcon />
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com">
+              <YoutubeIcon />
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <NavLink to="/boutique">Boutique</NavLink>
+          </li>
+          <li>
+            <NavLink to="/partenaire">Partenaire</NavLink>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
