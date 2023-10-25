@@ -115,7 +115,7 @@ const SideMenu = ({ isOpen, setIsMenuOpen }) => {
                 className="menu-dropdown-header"
                 onClick={() => setClubExpanded(!isClubExpanded)}
               >
-                <span> Club </span>
+                <span> CLUB </span>
                 <ArrowDownIcon width="14" height="8" />
               </div>
               <div

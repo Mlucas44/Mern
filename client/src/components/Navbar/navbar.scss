@@ -58,7 +58,7 @@
   left: -24rem;
   width: 24rem;
   height: 100vh;
-  background-color: #48801b;
+  background-color: white;
   transition: left 0.3s;
   z-index: 2000;
 
@@ -67,21 +67,22 @@
   }
 
   .menu-content {
+    background-color: #48801b;
     .menu-header {
-      //height: 4rem;
       display: flex;
       align-items: center;
       padding-left: 2.5rem;
       color: white;
       font-weight: bold;
-      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
       padding-top: 2.5rem;
       padding-bottom: 2.5rem;
 
       span {
-        margin-left: 5px;
-        font-size: 0.75rem;
+        margin-left: 10px;
         font-weight: 700;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
       }
       span,
       .close-menu-icon {
@@ -103,6 +104,15 @@
               color: white;
               text-decoration: none;
               flex-grow: 1;
+              padding-left: 2.5rem;
+              display: block; 
+                  transition: background-color 0.3s, color 0.3s;
+            }
+            &:hover {
+              span {
+                background-color: rgba(255, 255, 255, 0.3);
+                color: #48801b;
+              }
             }
           }
 
@@ -116,12 +126,20 @@
 
             ul {
               list-style: none;
+              padding-left: Orem;
               li {
                 a {
                   color: white;
                   text-decoration: none;
-                  &:hover {
-                    text-decoration: underline;
+                  display: block; 
+                  transition: background-color 0.3s, color 0.3s;
+                  padding-left: 5rem;
+                }
+          
+                &:hover {
+                  a {
+                    background-color: rgba(255, 255, 255, 0.3);
+                    color: #48801b;
                   }
                 }
               }
@@ -153,7 +171,6 @@
       li {
         padding: 1rem 0;
         list-style: none;
-        //padding-left: 0;
 
         a {
           color: white;
