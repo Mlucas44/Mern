@@ -5,6 +5,7 @@ function MenuIcon({
   height = "25",
   color = "white",
   onClick = "",
+  className = "",
 }) {
   return (
     <svg
@@ -13,6 +14,7 @@ function MenuIcon({
       height={height}
       viewBox="0 0 25 20"
       fill="none"
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

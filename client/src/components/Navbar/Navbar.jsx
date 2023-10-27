@@ -93,9 +93,9 @@ const Navbar = ({ userInfo }) => {
 };
 
 const SideMenu = ({ isOpen, setIsMenuOpen }) => {
-  const [isClubExpanded, setClubExpanded] = useState(false);
-  const [isSeniorExpanded, setSeniorExpanded] = useState(false);
-
+  const [expandedSubMenu, setExpandedSubMenu] = useState(null);
+  const CLUB = "CLUB";
+  const SENIOR = "SENIOR";
   return (
     <div className={`slide-menu ${isOpen ? "open" : ""}`}>
       <div className="menu-content">
@@ -113,28 +113,37 @@ const SideMenu = ({ isOpen, setIsMenuOpen }) => {
             <li className="menu-catégorie">
               <div
                 className="menu-dropdown-header"
-                onClick={() => setClubExpanded(!isClubExpanded)}
+                // Pour la sous-catégorie "CLUB"
+                onClick={() => {
+                  setExpandedSubMenu(expandedSubMenu !== CLUB ? CLUB : null);
+                }}
               >
                 <span> CLUB </span>
-                <ArrowDownIcon width="14" height="8" />
+                <ArrowDownIcon
+                  width="14"
+                  height="8"
+                  className={`arrow-transition ${
+                    expandedSubMenu === CLUB ? "rotated" : ""
+                  }`}
+                />
               </div>
               <div
                 className={`menu-sous-categorie ${
-                  isClubExpanded ? "open" : ""
+                  expandedSubMenu === CLUB ? "open" : ""
                 }`}
               >
                 <ul>
                   <li>
-                    <NavLink to="/historique">HISTORIQUE</NavLink>
+                    <NavLink to="/historique">Historique</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/bureau">BUREAU</NavLink>
+                    <NavLink to="/bureau">Bureau</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/organigramme">ORGANIGRAMME</NavLink>
+                    <NavLink to="/organigramme">Organigramme</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/installation">INSTALLATION</NavLink>
+                    <NavLink to="/installation">Installation</NavLink>
                   </li>
                 </ul>
               </div>
@@ -142,14 +151,25 @@ const SideMenu = ({ isOpen, setIsMenuOpen }) => {
             <li className="menu-catégorie">
               <div
                 className="menu-dropdown-header"
-                onClick={() => setSeniorExpanded(!isSeniorExpanded)}
+                // Pour la sous-catégorie "SENIOR"
+                onClick={() => {
+                  setExpandedSubMenu(
+                    expandedSubMenu !== SENIOR ? SENIOR : null
+                  );
+                }}
               >
                 <span>SENIOR</span>
-                <ArrowDownIcon width="14" height="8" />
+                <ArrowDownIcon
+                  width="14"
+                  height="8"
+                  className={`arrow-transition ${
+                    expandedSubMenu === SENIOR ? "rotated" : ""
+                  }`}
+                />
               </div>
               <div
                 className={`menu-sous-categorie ${
-                  isSeniorExpanded ? "open" : ""
+                  expandedSubMenu === SENIOR ? "open" : ""
                 }`}
               >
                 <ul>
@@ -173,33 +193,36 @@ const SideMenu = ({ isOpen, setIsMenuOpen }) => {
       </div>
       <div className="menu-secondary">
         <ul className="social-media">
-          <li>
+          <li className="socialIcon">
             <a href="https://facebook.com">
-              <FacebookIcon />
+              <FacebookIcon width="18" height="18" color="#48801b" />
             </a>
           </li>
-          <li>
+          <li className="socialIcon">
             <a href="https://twitter.com">
-              <TwitterIcon />
+              <TwitterIcon width="18" height="18" color="#48801b" />
             </a>
           </li>
-          <li>
+          <li className="socialIcon">
             <a href="https://instagram.com">
-              <InstagramIcon />
+              <InstagramIcon width="18" height="18" color="#48801b" />
             </a>
           </li>
-          <li>
+          <li className="socialIcon">
             <a href="https://youtube.com">
-              <YoutubeIcon />
+              <YoutubeIcon width="18" height="18" color="#48801b" />
             </a>
           </li>
         </ul>
         <ul>
-          <li>
-            <NavLink to="/boutique">Boutique</NavLink>
+          <li className="secondary-content">
+            <NavLink to="/boutique">BOUTIQUE</NavLink>
           </li>
-          <li>
-            <NavLink to="/partenaire">Partenaire</NavLink>
+          <li className="secondary-content">
+            <NavLink to="/partenaire">PARTENAIRES</NavLink>
+          </li>
+          <li className="secondary-content">
+            <NavLink to="/boutique">CONTACT</NavLink>
           </li>
         </ul>
       </div>
@@ -208,98 +231,3 @@ const SideMenu = ({ isOpen, setIsMenuOpen }) => {
 };
 
 export default Navbar;
-
-//               {userInfo && userInfo.role === "admin" && (
-//                 <li>
-//                   <NavLink to="/admin" className="menu-item">
-//                     Admin
-//                   </NavLink>
-//                 </li>
-//               )}
-
-// const DropdownMenu = ({ userInfo }) => {
-//   const { user } = useAuthContext();
-//   const { logout } = useLogout();
-//   const handleclick = () => {
-//     logout();
-//   };
-//   const [open, setopen] = useState("");
-//   //it will help to show and hide dropdown menu bar.
-//   function Toggle_dropdown() {
-//     open === "active" ? setopen("") : setopen("active");
-//   }
-
-//   return (
-//     <>
-//       <div className="right-menu">
-//         <div className="dropdown-menu" onClick={() => Toggle_dropdown()}>
-//           <div className="user-pic">
-//             <img src={avatar} alt="" />
-//           </div>
-//           <div className="user-data">
-//             <span>{user.name}</span>
-//           </div>
-//         </div>
-//         <div className={"drodown-box " + open}>
-//           <ul className="dropdown-item">
-//             <li>
-//               <NavLink to="/profile">Mon profil</NavLink>
-//             </li>
-//             <li>
-//               <NavLink onClick={handleclick} className="btn btn-dark btn-icon">
-//                 <svg
-//                   width="16"
-//                   height="16"
-//                   viewBox="0 0 16 16"
-//                   fill="none"
-//                   xmlns="http://www.w3.org/2000/svg"
-//                 >
-//                   <path
-//                     d="M10 13h1a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1M6 11l3-3-3-3M8.5 8H3"
-//                     stroke="currentColor"
-//                     strokeWidth="2"
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     vectorEffect="non-scaling-stroke"
-//                   ></path>
-//                 </svg>
-//                 <span>Logout</span>
-//               </NavLink>
-//             </li>
-//           </ul>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// const LoginMenu = () => {
-//   return (
-//     <>
-//       <div className="right-menu">
-//         <NavLink to="/signup" className="btn btn-light">
-//           Sign up
-//         </NavLink>
-//         <NavLink to="/login" className="btn btn-dark btn-icon">
-//           <svg
-//             width="16"
-//             height="16"
-//             viewBox="0 0 16 16"
-//             fill="none"
-//             xmlns="http://www.w3.org/2000/svg"
-//           >
-//             <path
-//               d="M10 13h1a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1M6 11l3-3-3-3M8.5 8H3"
-//               stroke="currentColor"
-//               strokeWidth="2"
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//               vectorEffect="non-scaling-stroke"
-//             ></path>
-//           </svg>
-//           <span>Sign in</span>
-//         </NavLink>
-//       </div>
-//     </>
-//   );
-// };

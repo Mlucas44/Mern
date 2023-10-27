@@ -79,11 +79,10 @@ const Home = () => {
   const renderSlides = () =>
     slides.map((slide, index) => (
       <div key={index} className="slide-content">
-        <img
-          src={slide.image}
-          alt={`Slide ${index + 1}`}
+        <div
+          style={{ backgroundImage: `url(${slide.image})` }}
           className="background-image"
-        />
+        ></div>
         <div className="slide-info">
           <h2>{slide.title}</h2>
           <p>{slide.description}</p>

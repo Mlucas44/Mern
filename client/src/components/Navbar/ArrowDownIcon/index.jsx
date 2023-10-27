@@ -1,12 +1,18 @@
 import React from "react";
 
-function FacebookIcon({ width = "25", height = "25", color = "white" }) {
+function ArrowDownIcon({
+  width = "25",
+  height = "25",
+  color = "white",
+  className = "",
+}) {
   return (
     <svg
       width={width}
       height={height}
       viewBox="0 0 14 8"
       fill={color}
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -17,4 +23,4 @@ function FacebookIcon({ width = "25", height = "25", color = "white" }) {
   );
 }
 
-export default FacebookIcon;
+export default ArrowDownIcon;

@@ -32,8 +32,12 @@
     .left-menu,
     .center-menu,
     .right-menu {
+      flex: 1;
       display: flex;
       align-items: center;
+    }
+    .right-menu {
+      justify-content: end;
     }
     .left-menu {
       .cursor-pointer {
@@ -41,6 +45,9 @@
       }
     }
     .center-menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       justify-content: center;
       flex-grow: 1;
     }
@@ -50,6 +57,24 @@
       width: auto;
     }
   }
+}
+.slide-menu::-webkit-scrollbar {
+  width: 5px;
+}
+.slide-menu::-webkit-scrollbar-thumb {
+  background-color: darken(#48801b, 8%);
+  &:hover {
+    background-color: #555;
+  }
+}
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1999;
 }
 
 .slide-menu {
@@ -61,6 +86,7 @@
   background-color: white;
   transition: left 0.3s;
   z-index: 2000;
+  overflow-y: auto;
 
   &.open {
     left: 0;
@@ -68,6 +94,7 @@
 
   .menu-content {
     background-color: #48801b;
+    padding-bottom: 2.5rem;
     .menu-header {
       display: flex;
       align-items: center;
@@ -92,53 +119,76 @@
 
     .menu-list {
       .list {
+        padding-left: 0;
         .menu-catégorie {
           list-style: none;
           .menu-dropdown-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 22px;
+            padding-bottom: 22px;
             cursor: pointer;
+
+            .arrow-transition {
+              transition: transform 0.3s ease-in-out;
+              margin-right: 20px;
+            }
+
+            .rotated {
+              transform: rotate(180deg);
+            }
 
             span {
               color: white;
               text-decoration: none;
               flex-grow: 1;
               padding-left: 2.5rem;
-              display: block; 
-                  transition: background-color 0.3s, color 0.3s;
+              display: block;
+              transition: background-color 0.5s, color 0.5s;
+              font-weight: 700;
+              font-size: 1rem;
+              line-height: 1.25rem;
             }
             &:hover {
-              span {
-                background-color: rgba(255, 255, 255, 0.3);
-                color: #48801b;
-              }
+              background-color: rgba(255, 255, 255, 0.2);
+              color: #48801b;
             }
           }
 
           .menu-sous-categorie {
-            display: none;
             background-color: rgba(255, 255, 255, 0.1);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
             &.open {
-              display: block;
+              max-height: 500px;
+              opacity: 1;
             }
 
             ul {
               list-style: none;
-              padding-left: Orem;
+              padding-left: 0rem;
               li {
+                padding-top: 18px;
+                padding-bottom: 18px;
                 a {
                   color: white;
                   text-decoration: none;
-                  display: block; 
-                  transition: background-color 0.3s, color 0.3s;
+                  display: block;
+                  font-weight: 400;
+                  font-size: 1rem;
+                  line-height: 1.25rem;
                   padding-left: 5rem;
                 }
-          
+
                 &:hover {
+                  background-color: rgba(255, 255, 255, 0.3);
+
                   a {
-                    background-color: rgba(255, 255, 255, 0.3);
+                    transition: color 0.5s;
                     color: #48801b;
                   }
                 }
@@ -151,12 +201,15 @@
   }
 
   .menu-secondary {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     .social-media {
       display: flex;
-      justify-content: space-between;
-      padding: 1rem 0;
+      justify-content: center;
+      gap: 1rem;
 
-      li {
+      .socialIcon {
+        list-style: none;
         a {
           display: inline-block;
           padding: 0.5rem;
@@ -168,12 +221,12 @@
     }
 
     ul {
-      li {
+      .secondary-content {
         padding: 1rem 0;
         list-style: none;
 
         a {
-          color: white;
+          color: #48801b;
           text-decoration: none;
           &:hover {
             text-decoration: underline;
