@@ -1,6 +1,6 @@
 import React from "react";
 
-function FacebookIcon({
+function CrossIcon({
   width = "25",
   height = "25",
   color = "white",
@@ -25,4 +25,4 @@ function FacebookIcon({
   );
 }
 
-export default FacebookIcon;
+export default CrossIcon;

@@ -83,12 +83,27 @@
 
       .progress-title {
         position: absolute;
-        top: -25px;
+        top: -35px;
         left: 10px;
         right: 0;
         font-size: 18px;
         text-transform: uppercase;
         color: #fff;
+
+        .slide-number {
+          font-size: 1.875rem;
+          line-height: 2.25rem;
+          font-weight: 700;
+          margin-right: 10px;
+          margin-left: 10px;      
+        }
+
+        .slide-title {
+          text-transform: uppercase;
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 14px;
+        }
       }
       .progress-bar {
         height: 100%;

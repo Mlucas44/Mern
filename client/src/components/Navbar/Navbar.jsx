@@ -50,20 +50,20 @@ const Navbar = ({ userInfo }) => {
         <nav className="navbar">
           <div className="left-menu">
             <MenuIcon
-              width="18"
-              height="18"
+              width="25"
+              height="20"
               onClick={toggleMenu}
               className="cursor-pointer"
             />
             <span onClick={toggleMenu} className="cursor-pointer">
-              Menu
+              MENU
             </span>
 
             <NavLink to="/partenaire" className="menu-item">
-              Partenaire
+              PARTENAIRE
             </NavLink>
             <NavLink to="/boutique" className="menu-item">
-              Boutique
+              BOUTIQUE
             </NavLink>
           </div>
 
@@ -74,10 +74,10 @@ const Navbar = ({ userInfo }) => {
           </div>
 
           <div className="right-menu">
-            <FacebookIcon width="18" height="18" />
-            <InstagramIcon width="18" height="18" />
-            <TwitterIcon width="18" height="18" />
-            <YoutubeIcon width="18" height="18" />
+            <FacebookIcon width="20" height="20" />
+            <InstagramIcon width="20" height="20" />
+            <TwitterIcon width="20" height="20" />
+            <YoutubeIcon width="20" height="20" />
           </div>
         </nav>
       </div>

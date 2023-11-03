@@ -27,19 +27,20 @@ const Home = () => {
   const slides = [
     {
       image: home1,
-      title: "Titre 1 - Résumer du match",
+      title:
+        "Résumer du match Résumer du match Résumer du match Résumer du match Résumer du match",
       description: "Je suis la Description numéro 1",
       link: "#link1",
     },
     {
       image: home2,
-      title: "Titre 2 - Gambardella 2ème tour",
+      title: "Gambardella 2ème tour",
       description: "Je suis la Description numéro 2",
       link: "#link2",
     },
     {
       image: home3,
-      title: "Titre 3 - Coupe de france",
+      title: "Coupe de france",
       description: "Je suis la Description numéro 3",
       link: "#link3",
     },
@@ -96,7 +97,10 @@ const Home = () => {
   const renderProgressBars = () =>
     slides.map((slide, index) => (
       <div key={index} className="progress-section">
-        <div className="progress-title">{slide.title}</div>
+        <div className="progress-title">
+          <span className="slide-number">{index + 1}</span>
+          <span className="slide-title">{slide.title}</span>
+        </div>
         <div
           className={`progress-bar ${currentSlide === index ? "active" : ""}`}
           style={{ width: currentSlide === index ? `${progress}%` : "0%" }}
