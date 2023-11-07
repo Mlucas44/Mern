@@ -27,21 +27,23 @@ const Home = () => {
   const slides = [
     {
       image: home1,
-      title:
-        "Résumer du match Résumer du match Résumer du match Résumer du match Résumer du match",
-      description: "Je suis la Description numéro 1",
+      title: "Rencontre avec nos deux présidents",
+      description:
+        "Après un an et demi à la tête du club, Christine FONTEYRAUD et Laurent DEPUSSAY se livrent au jeu des questions/réponses !",
       link: "#link1",
     },
     {
       image: home2,
-      title: "Gambardella 2ème tour",
-      description: "Je suis la Description numéro 2",
+      title: "Coupe de France féminine : Large victoire et qualification",
+      description:
+        "Nos féminines seront au prochain tour de la coupe de France !",
       link: "#link2",
     },
     {
       image: home3,
-      title: "Coupe de france",
-      description: "Je suis la Description numéro 3",
+      title: "D3 – J6 : Grenoble / Arlac en live !",
+      description:
+        "Suivez le live de notre équipe fanion féminine en déplacement à Grenoble pour le compte de la 6ème journée du championnat.",
       link: "#link3",
     },
   ];
