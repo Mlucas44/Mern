@@ -8,6 +8,7 @@ import Profile from './pages/Profile' // Assurez-vous que le chemin d'importatio
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
 import NavBar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
   const { user, userInfo } = useContext(AuthContext);
@@ -32,6 +33,7 @@ const App = () => {
           path='/profile'
           element={user ? <Profile /> : <Navigate to="/login" />} />
       </Routes>
+      <Footer />
     </>
   )
 }
