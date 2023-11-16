@@ -40,9 +40,13 @@
       text-align: center;
       color: #fff;
       z-index: 2;
+      width: 700px;
 
       h2 {
-        font-size: 24px;
+        font-size: 3.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        line-height: 1;
         margin-bottom: 15px;
       }
 
@@ -95,7 +99,7 @@
           line-height: 2.25rem;
           font-weight: 700;
           margin-right: 10px;
-          margin-left: 10px;      
+          margin-left: 10px;
         }
 
         .slide-title {
