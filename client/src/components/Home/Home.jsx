@@ -180,7 +180,7 @@ const Home = () => {
         <Slider {...settings}>{renderSlides()}</Slider>
         <div className="progress-container">{renderProgressBars()}</div>
       </div>
-      <NewContainer /> {/* Ajoutez cette ligne */}
+      <NewContainer />
     </div>
   );
 };
