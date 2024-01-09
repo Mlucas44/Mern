@@ -67,7 +67,7 @@
     }
 
     .navbar-logo {
-      height: 50px;
+      height: 150px;
       width: auto;
     }
   }
@@ -249,4 +249,24 @@
       }
     }
   }
+}
+
+/* Pour les écrans plus petits que 1280px */
+@media screen and (max-width: 1280px) {
+  .nav-container .navbar .left-menu .menu-item {
+      display: none; /* Cache les éléments PARTENAIRE et BOUTIQUE */
+  }
+}
+
+/* Pour les écrans plus petits que 630px */
+@media screen and (max-width: 630px) {
+  .nav-container .navbar .right-menu svg {
+      display: none; /* Cache les icônes de réseaux sociaux */
+  }
+}
+.nav-container .navbar .center-menu .logo {
+  position: absolute; /* Positionne le logo hors du flux normal */
+  bottom: 0; /* Aligner le bas du logo avec le bas de la navbar */
+  //left: 50%; /* Centrer le logo horizontalement */
+  transform: translateY(60%); /* Décaler le logo vers le bas */
 }

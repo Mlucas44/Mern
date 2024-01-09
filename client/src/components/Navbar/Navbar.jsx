@@ -8,7 +8,7 @@ import YoutubeIcon from "./YoutubeIcon";
 import MenuIcon from "./MenuIcon";
 import ArrowDownIcon from "./ArrowDownIcon";
 import CrossIcon from "./CrossIcon";
-import logo from "./logo.png";
+import logo from "./logo1.png";
 
 const Navbar = ({ userInfo }) => {
   const [isScrolled, setIsScrolled] = useState(false);
