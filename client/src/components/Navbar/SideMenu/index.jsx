@@ -21,6 +21,9 @@ const menuItems = [
     subItems: [
       { name: "Historique", path: "/historique" },
       { name: "Bureau", path: "/bureau" },
+      { name: "Organigramme", path: "/Organigramme" },
+      { name: "Installations", path: "/Installations" },
+      { name: "Plan D'accès", path: "/Plan D'accès" },
       // Plus d'items ici
     ],
   },
