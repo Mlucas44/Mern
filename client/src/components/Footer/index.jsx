@@ -1,9 +1,9 @@
 import React from "react";
-import "./Footer.scss";
-import FacebookIcon from "../Navbar/FacebookIcon";
-import InstagramIcon from "../Navbar/InstagramIcon";
-import TwitterIcon from "../Navbar/TwitterIcon";
-import YoutubeIcon from "../Navbar/YoutubeIcon";
+import "./index.scss";
+import FacebookIcon from "../../assets/icons/FacebookIcon";
+import InstagramIcon from "../../assets/icons/InstagramIcon";
+import TwitterIcon from "../../assets/icons/TwitterIcon";
+import YoutubeIcon from "../../assets/icons/YoutubeIcon";
 
 function Footer() {
   return (

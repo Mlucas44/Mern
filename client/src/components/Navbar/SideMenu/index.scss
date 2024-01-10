@@ -1,0 +1,92 @@
+.slide-menu {
+  position: fixed;
+  top: 0;
+  left: -24rem;
+  width: 24rem;
+  height: 100vh;
+  background-color: white;
+  transition: left 0.3s;
+  z-index: 2000;
+  overflow-y: auto;
+
+  &.open {
+    left: 0;
+  }
+
+  .menu-content {
+    background-color: #48801b;
+    padding-bottom: 2.5rem;
+    .menu-header {
+      display: flex;
+      align-items: center;
+      padding-left: 2.5rem;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+
+      span {
+        margin-left: 10px;
+        font-weight: 700;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      span,
+      .close-menu-icon {
+        cursor: pointer;
+      }
+    }
+
+    .menu-list {
+      .list {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .menu-secondary {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    .social-media {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      .socialIcon {
+        list-style: none;
+        a {
+          display: inline-block;
+          padding: 0.5rem;
+          &:hover {
+            color: #48801b;
+          }
+        }
+      }
+    }
+
+    ul {
+      .secondary-content {
+        padding: 1rem 0;
+        list-style: none;
+
+        a {
+          color: #48801b;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+.slide-menu::-webkit-scrollbar {
+  width: 5px;
+}
+.slide-menu::-webkit-scrollbar-thumb {
+  background-color: darken(#48801b, 8%);
+  &:hover {
+    background-color: #555;
+  }
+}

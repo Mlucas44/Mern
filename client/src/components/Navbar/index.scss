@@ -1,0 +1,114 @@
+@import "./../../scss/_variable.scss";
+
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: transparent;
+  transition: background-color 0.5s ease;
+
+  &.scrolled {
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(90deg, #48801b, #48801b);
+  }
+
+  a,
+  span,
+  svg {
+    color: white !important;
+  }
+
+  .navbar {
+    margin: auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 63px;
+
+    .left-menu,
+    .center-menu,
+    .right-menu {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .right-menu {
+      justify-content: end;
+      gap: 1.5rem;
+      margin-right: 1rem;
+    }
+    .left-menu {
+      font-size: 0.875rem;
+      margin-left: 1rem;
+
+      span {
+        font-weight: 600;
+        margin-left: 0.6rem;
+      }
+      a {
+        font-weight: 600;
+        margin-left: 4rem;
+      }
+      .cursor-pointer {
+        cursor: pointer;
+      }
+    }
+    .center-menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      .logo {
+        position: absolute;
+        bottom: 0;
+        transform: translateY(60%); /* Décaler le logo vers le bas */
+      }
+    }
+    .navbar-logo {
+      height: 150px;
+      width: auto;
+    }
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1999;
+}
+
+/* Pour les écrans plus petits que 1280px */
+@media screen and (max-width: 1280px) {
+  .nav-container .navbar {
+    padding: 0 0;
+    .left-menu {
+      font-size: 12px;
+      line-height: 16px;
+      .menu-item {
+        display: none;
+      }
+    }
+  }
+}
+
+/* Pour les écrans plus petits que 630px */
+@media screen and (max-width: 630px) {
+  .nav-container .navbar .right-menu svg {
+    display: none;
+  }
+  .nav-container .navbar .navbar-logo {
+    height: 100px;
+  }
+  .nav-container .navbar .center-menu .logo {
+    transform: translateY(40%); /* Décaler le logo vers le bas */
+  }
+}
