@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import "./index.scss";
 import MenuItem from "./MenuItem"; // Assurez-vous que le chemin d'importation est correct
@@ -7,11 +7,14 @@ import {
   InstagramIcon,
   TwitterIcon,
   YoutubeIcon,
-  ArrowDownIcon,
   CrossIcon,
 } from "../../../assets/icons";
 
 const menuItems = [
+  {
+    name: "ACCUEIL",
+    path: "/accueil",
+  },
   {
     name: "CLUB",
     path: "/club",

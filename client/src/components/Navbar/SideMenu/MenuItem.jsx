@@ -7,15 +7,24 @@ const MenuItem = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+  const hasSubItems = item.subItems && item.subItems.length > 0;
+
   return (
     <li className="menu-catégorie">
-      <div className="menu-dropdown-header" onClick={toggle}>
+      <div
+        className="menu-dropdown-header"
+        onClick={hasSubItems ? toggle : null}
+      >
         <span>{item.name}</span>
-        <ArrowDownIcon
-          className={`arrow-transition ${isOpen ? "rotated" : ""}`}
-        />
+        {hasSubItems && (
+          <ArrowDownIcon
+            width="15"
+            height="10"
+            className={`arrow-transition ${isOpen ? "rotated" : ""}`}
+          />
+        )}
       </div>
-      {isOpen && item.subItems && (
+      {isOpen && hasSubItems && (
         <ul className={`menu-sous-categorie ${isOpen ? "open" : ""}`}>
           {item.subItems.map((subItem) => (
             <MenuItem key={subItem.name} item={subItem} isSubItem />
