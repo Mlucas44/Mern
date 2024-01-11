@@ -28,7 +28,7 @@ const menuItems = [
     ],
   },
   {
-    name: "SENIOR",
+    name: "SENIORS",
     path: "/senior",
     subItems: [
       {
@@ -37,7 +37,6 @@ const menuItems = [
         subItems: [
           { name: "Accueil", path: "/r1/accueil" },
           { name: "Staff", path: "/r1/staff" },
-          // Plus d'items ici
         ],
       },
       {
@@ -46,17 +45,30 @@ const menuItems = [
         subItems: [
           { name: "Accueil", path: "/r2/accueil" },
           { name: "Staff", path: "/r2/staff" },
-          // Plus d'items ici
         ],
       },
       {
         name: "R3",
         path: "/r3",
       },
-      // Plus de catégories comme R2, R3, etc.
     ],
   },
-  // Plus de catégories principales
+  {
+    name: "FEMININES",
+    path: "/accueil",
+  },
+  {
+    name: "ECOLE DE FOOT",
+    path: "/accueil",
+  },
+  {
+    name: "PRE-FORMATION",
+    path: "/accueil",
+  },
+  {
+    name: "POST-FORMATION",
+    path: "/accueil",
+  },
 ];
 
 const SideMenu = ({ isOpen, setIsMenuOpen }) => {

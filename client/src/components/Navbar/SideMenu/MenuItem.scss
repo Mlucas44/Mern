@@ -1,13 +1,25 @@
-.menu-catégorie {
+$menu-padding: 20px;
+$menu-background-hover: rgba(255, 255, 255, 0.2);
+$menu-text-color-hover: #48801b;
+$menu-indent: 5rem;
+
+.menu-category {
   list-style: none;
-  .menu-dropdown-header {
+
+  &__dropdown-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 22px;
-    padding-bottom: 22px;
+    padding: $menu-padding 0;
     cursor: pointer;
+    transition: background-color 0.7s, color 0.5s;
 
+    &:hover {
+      background-color: $menu-background-hover;
+      span{
+        color: $menu-text-color-hover;
+      }
+    }
     .arrow-transition {
       transition: transform 0.3s ease-in-out;
       margin-right: 20px;
@@ -23,119 +35,84 @@
       flex-grow: 1;
       padding-left: 2.5rem;
       display: block;
-      transition: background-color 0.5s, color 0.5s;
       font-weight: 700;
-      font-size: 1rem;
-      line-height: 1.25rem;
+      font-size: 15px;
+      line-height: 24px;
     }
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #48801b;
-    }
+    
   }
 
-  .menu-sous-categorie {
+  &__item {
+    //padding: 18px 0;
+    //padding-left: $menu-indent;
+   
+
+    // &:hover {
+    //   background-color: $menu-background-hover;
+    //   transition: background-color 0.9;
+    //   > a {
+    //     color: $menu-text-color-hover;
+    //   }
+    // }
+
+    // > a {
+    //   color: white;
+    //   text-decoration: none;
+    //   display: block;
+    //   font-weight: 400;
+    //   font-size: 1rem;
+    //   line-height: 1.25rem;
+    // }
+  }
+
+  &__sub-category {
     background-color: rgba(255, 255, 255, 0.1);
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    padding-left: 0;
 
     &.open {
       max-height: 500px;
       opacity: 1;
     }
-
-    ul {
-      list-style: none;
-      padding-left: 0rem;
-      li {
-        padding-top: 18px;
-        padding-bottom: 18px;
-        a {
-          color: white;
-          text-decoration: none;
-          display: block;
-          font-weight: 400;
-          font-size: 1rem;
-          line-height: 1.25rem;
-          padding-left: 5rem;
-        }
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.3);
-
-          a {
-            transition: color 0.5s;
-            color: #48801b;
-          }
-        }
-        .sub-menu {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.3s ease-out;
-
-          &.open {
-            max-height: 100px; // Ajustez en fonction du contenu
-          }
-
-          ul {
-            padding-left: 20px; // Indentation pour les sous-menus
-
-            li {
-              padding: 5px 0; // Espace autour des éléments du sous-menu
-            }
-          }
-        }
+    span{
+      font-weight: 400;
+      font-size: 14px;
+      padding-left: 4.5rem;
+      line-height: 20px;
+    }
+    .menu-category {
+    &__sub-category{
+      span{
+        font-weight: 400;
+        font-size: 14px;
+        padding-left: 8rem;
+        line-height: 20px;
       }
     }
   }
-}
-.menu-catégorie {
-  // Styles pour les catégories
 
-  &.sub-item {
-    // Styles spécifiques aux sous-catégories
-    a {
-      padding-left: 7rem; // par exemple, une plus grande indentation
-    }
-  }
+     ul {
+    //   list-style: none;
+    //   padding-left: 0;
 
-  .menu-dropdown-header {
-    // Styles pour les en-têtes déroulants
-  }
+    //   li {
+    //     &:hover {
+    //       background-color: $menu-background-hover;
+    //     }
 
-  .menu-sous-categorie {
-    // Styles de base pour tous les sous-menus
-    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    overflow: hidden;
-
-    &.open {
-      max-height: 500px; // hauteur max par défaut pour tous les sous-menus
-      opacity: 1;
-    }
-
-    ul {
-      list-style: none;
-
-      .menu-catégorie {
-        // Styles pour les sous-catégories imbriquées
-
-        &.sub-item {
-          // Styles spécifiques aux sous-sous-catégories
-          .menu-dropdown-header {
-            // Styles spécifiques aux en-têtes des sous-sous-catégories
-          }
-
-          .menu-sous-categorie {
-            // Styles spécifiques aux sous-sous-menus
-
-            &.open {
-              max-height: 250px; // hauteur max spécifique aux sous-sous-menus
-            }
-          }
-        }
-      }
-    }
+    //     > a {
+    //       padding-left: $menu-indent; /* Ajouté pour aligner le texte des liens */
+    //       color: white;
+    //       text-decoration: none;
+    //       display: block;
+    //       font-weight: 400;
+    //       font-size: 1rem;
+    //       line-height: 1.25rem;
+    //     }
+    //   }
+     }
   }
 }
